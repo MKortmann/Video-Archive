@@ -52,7 +52,7 @@ class UI {
   showAlert(message, className) {
     //create div
     const div = document.createElement("div");
-    //add classes
+    //add classes: the class alert is used to be able to remove it afterwards!
     div.className = `alert ${className}`;
     // Add text
     div.appendChild(document.createTextNode(message));
@@ -64,7 +64,9 @@ class UI {
     container.insertBefore(div, form);
 
     //the message should disappear after 3 seconds
-    
+    setTimeout(function() {
+      document.querySelector(".alert").remove();
+    },3000);
   }
 
 
