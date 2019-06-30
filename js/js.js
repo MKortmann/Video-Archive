@@ -9,14 +9,13 @@ class Video {
     this.videoTime = videoTime;
     this.videoNo = videoNo;
   }
-}
+};
 
 class UI {
 
   addVideoToList(video) {
 
     const videoList = document.querySelector(".videoList");
-
     // Create tr element
     const row = document.createElement("tr");
     // Insert columns
@@ -28,15 +27,53 @@ class UI {
       <td>${video.videoDate}</td>
       <td>${video.videoTime}</td>
       <td>${video.videoNo}</td>
+      <th class="delete">X</th>
     `;
     //append element
     videoList.appendChild(row);
   }
 
-}
+  deleteVideo(target) {
+    if(target.className === "delete") {
+      target.parentElement.remove();
+    }
+  }
+
+  clearFields() {
+    document.querySelector(".projectName").value = "";
+    document.querySelector(".videoTitle").value = "";
+    document.querySelector(".yourName").value = "";
+    document.querySelector(".eMail").value = "";
+    document.querySelector(".videoDate").value = "";
+    document.querySelector(".videoTime").value = "";
+    document.querySelector(".videoNo").value = "";
+  }
+
+  showAlert(message, className) {
+    //create div
+    const div = document.createElement("div");
+    //add classes
+    div.className = `alert ${className}`;
+    // Add text
+    div.appendChild(document.createTextNode(message));
+    // Get the element to be insert it
+    const container = document.querySelector(".container");
+    // get the element in which the div will be insert before it
+    const form = document.querySelector(".form");
+    // insert alert
+    container.insertBefore(div, form);
+
+    //the message should disappear after 3 seconds
+    
+  }
 
 
-document.querySelector("#submit").addEventListener("click", function() {
+
+};
+// ui object!
+const ui = new UI();
+
+document.querySelector("#submit").addEventListener("click", function(e) {
 
   const projectName = document.querySelector(".projectName").value;
   const videoTitle = document.querySelector(".videoTitle").value;
@@ -52,13 +89,22 @@ document.querySelector("#submit").addEventListener("click", function() {
 
   // Validate input
   if(projectName === "" || videoTitle === "" || yourName === "" || eMail === "" || videoDate === "" || videoTime === "" || videoNo === "") {
-    alert("Check your input!");
+
+    ui.showAlert("Please, check your input!", "error");
+
   }
 
-  class ui = new UI();
-
+  // Add video to the video list table
   ui.addVideoToList(video);
 
-  console.log(`Project Name: ${projectName}, VideoTile: ${videoTitle}, yourName: ${yourName}, eMail: ${eMail}, videoDate: ${videoDate}, videoTime: ${videoTime}, videoNo: ${videoNo}`);
+  // Clear Fields
+  // ui.clearFields();
 
+  e.preventDefault();
+
+});
+
+// delete the video
+document.querySelector(".videoList").addEventListener("click", function(e) {
+  ui.deleteVideo(e.target);
 });

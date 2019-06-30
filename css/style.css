@@ -17,6 +17,24 @@ table thead {
   color: #33C3F0;
 }
 
+.delete {
+  color: red;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+.success, .error {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.success {
+  background: green;
+}
+
+.error {
+  background: red;
+}
+
 h1 {
   text-align: center;
   color: firebrick;
