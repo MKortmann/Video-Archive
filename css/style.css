@@ -1,0 +1,60 @@
+label {
+  font-size: 3rem;
+}
+
+input {
+  font-size: 2.0rem;
+}
+
+table thead {
+  font-size: 2.5rem;
+  color: gray;
+  color: darkslategray;
+  color: firebrick;
+  color: crimson;
+  color: black;
+  color: saddlebrown;
+  color: #33C3F0;
+}
+
+h1 {
+  text-align: center;
+  color: firebrick;
+  color: #33C3F0;
+}
+
+/*h1 Second Style*/
+.shadowText {
+color: black;
+font-size: 37pt;
+font-weight: 200;
+letter-spacing: 10px;
+text-transform: uppercase;
+line-height: 1.7;
+/* offset-x | offset-y | blur-radius | color */
+text-shadow:
+  1px -1px 0 #767676,
+  -1px 2px 1px #737272,
+  -2px 2px 1px #787777,
+  -3px 3px 1px #7f7d7d,
+  -4px 4px 1px #868585,
+  -5px 5px 1px #8f8e8d,
+  -6px 6px 1px #999897,
+  -7px 7px 1px #a3a1a1,
+  -8px 8px 1px #adabab,
+  -9px 9px 1px #b7b6b5,
+  -10px 10px 1px #c1bfbf,
+  -11px 11px 1px #cbc9c8,
+  -12px 12px 1px #d4d2d1,
+  -13px 13px 1px #dbdad9,
+  -14px 14px 1px #e2e0df;
+}
+
+#submit {
+  font-size: 20px;
+  height: 60px;
+}
+
+.container {
+  max-width: 100%;
+}

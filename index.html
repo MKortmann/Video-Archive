@@ -4,9 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <link rel="stylesheet" href="./lib/skeleton.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>KJP-Video</title>
 </head>
 <body>
 
+  <h1 class="shadowText">KJP Video System</h1>
+
+  <div class="container u-full-width">
+    <!-- Input Form -->
+    <form>
+      <!-- Project Name & Video Title -->
+      <div class=row>
+        <div class="six columns">
+          <label for="title" class="u-pull-left">Project Name</label>
+          <input type="text" class="u-full-width projectName" placeholder="Insert your project name">
+        </div>
+        <div class="six columns">
+          <label for="title" class="u-pull-left">Video Title</label>
+          <input type="text" class="u-full-width videoTitle" placeholder="Insert your title for this video">
+        </div>
+      </div>
+
+      <!-- Your Name & E-Mail -->
+      <div class="row">
+        <div class="six columns">
+          <label>Your Name</label>
+          <input type="text" class="u-full-width yourName" placeholder="Insert your name">
+        </div>
+        <div class="six columns">
+          <label for="">E-Mail</label>
+          <input type="text" class="u-full-width eMail" placeholder="youremail@uniklinik-freiburg.de">
+        </div>
+      </div>
+      <!-- Date, Time and Video Number -->
+      <div class="row">
+        <div class="four columns">
+          <label for="date">Date</label>
+          <input type="text" class="u-full-width videoDate" placeholder="01.01.2019">
+        </div>
+        <div class="four columns">
+          <label for="time">Time</label>
+          <input type="text" class="u-full-width videoTime" placeholder="10:00">
+        </div>
+        <div class="four columns">
+          <label for="number">Video No.</label>
+          <input type="text" class="u-full-width videoNo" placeholder="1">
+        </div>
+      </div>
+      <br>
+      <input class="button-primary u-full-width" id="submit" type="submit" >
+    </form>
+  </div>
+
+  <div class="container2">
+    <table class="u-full-width">
+      <thead>
+        <th>Project Name</th>
+        <th>Video Title</th>
+        <th>Name</th>
+        <th>E-Mail</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Video No.</th>
+      </thead>
+      <tbody class="videoList"></tbody>
+      <!--
+        <tr>
+          <td></td>*7
+        </tr>
+
+       -->
+    </table>
+  </div>
+
+
+<script src="./js/js.js"></script>
 </body>
 </html>
