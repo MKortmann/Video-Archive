@@ -94,13 +94,18 @@ document.querySelector("#submit").addEventListener("click", function(e) {
 
     ui.showAlert("Please, check your input!", "error");
 
+  } else {
+
+    // Add video to the video list table
+    ui.addVideoToList(video);
+
+    // Show sucess message
+    ui.showAlert("The Video was added!", "success");
+
+    // Clear Fields
+    ui.clearFields();
+
   }
-
-  // Add video to the video list table
-  ui.addVideoToList(video);
-
-  // Clear Fields
-  // ui.clearFields();
 
   e.preventDefault();
 
