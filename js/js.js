@@ -40,6 +40,9 @@ class UI {
   deleteVideo(target) {
     if(target.className === "delete") {
       target.parentElement.remove();
+      console.log(target);
+      Store.removeVideo(target);
+      ui.showAlert(`The video was deleted!`, "success");
     }
   }
 
@@ -102,6 +105,56 @@ class UI {
 // ui object!
 const ui = new UI();
 
+// Local Storage Class - static so we do not need to instantiate
+class Store {
+
+// Get Videos from LocalStorage
+  static getVideosFromLS() {
+    let videos;
+    if(localStorage.getItem("videos") === null) {
+      videos = [];
+    } else {
+      videos = JSON.parse(localStorage.getItem("videos"));
+      console.log(`Getting books from the memory!`);
+    }
+    return videos;
+  }
+
+  static displayVideos() {
+    const videos = Store.getVideosFromLS();
+    //Looping through the videos and add it!
+    videos.forEach(function(item) {
+      ui.addVideoToList(item);
+    });
+  }
+
+// Add Video to localStorage
+  static addVideo(video) {
+    const videos = Store.getVideosFromLS();
+    // add to LocalStorage
+    videos.push(video);
+    localStorage.setItem("videos", JSON.stringify(videos));
+  }
+
+  static removeVideo(target) {
+    const videos = Store.getVideosFromLS();
+    //minus 1 because the index start at zero and the ArchivNo. start at 1.
+    let compareValue = target.parentElement.cells[0].innerText-1;
+
+    videos.forEach(function(item, index) {
+      if(compareValue == index) {
+        videos.splice(index, 1);
+      };
+    })
+    //rewriting localStorage
+    localStorage.clear();
+    localStorage.setItem("videos", JSON.stringify(videos));
+  }
+
+}
+//DOM Load Event: Initialization!
+document.addEventListener("DOMContentLoaded", Store.displayVideos());
+
 document.querySelector("#submit").addEventListener("click", function(e) {
 
   const projectName = document.querySelector(".projectName").value;
@@ -125,6 +178,9 @@ document.querySelector("#submit").addEventListener("click", function(e) {
 
     // Add video to the video list table
     ui.addVideoToList(video);
+
+    // Add video to LocalStorage
+    Store.addVideo(video);
 
     // Show sucess message
     ui.showAlert(`Dear ${video.yourName}, the video: ${video.videoTitle} was added!`, "success");
