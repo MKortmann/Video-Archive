@@ -17,6 +17,15 @@ table thead {
   color: #33C3F0;
 }
 
+tbody tr:nth-child(even) {
+	background-color: #9da3b0;
+  background-color: #33C3F0;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: white;
+}
+
 .delete {
   color: red;
   font-size: 2.5rem;
@@ -29,10 +38,14 @@ table thead {
 
 .success {
   background: green;
+  /* background: #33C3F0; */
+  background: seaGreen;
+  text-align: center;
 }
 
 .error {
   background: red;
+  text-align: center;
 }
 
 h1 {

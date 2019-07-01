@@ -40,13 +40,13 @@ class UI {
   }
 
   clearFields() {
-    document.querySelector(".projectName").value = "";
-    document.querySelector(".videoTitle").value = "";
-    document.querySelector(".yourName").value = "";
-    document.querySelector(".eMail").value = "";
-    document.querySelector(".videoDate").value = "";
-    document.querySelector(".videoTime").value = "";
-    document.querySelector(".videoNo").value = "";
+    // document.querySelector(".projectName").value = "";
+    // document.querySelector(".videoTitle").value = "";
+    // document.querySelector(".yourName").value = "";
+    // document.querySelector(".eMail").value = "";
+    // document.querySelector(".videoDate").value = "";
+    // document.querySelector(".videoTime").value = "";
+    // document.querySelector(".videoNo").value = "";
   }
 
   showAlert(message, className) {
