@@ -26,6 +26,10 @@ tbody tr:nth-child(odd) {
 	background-color: white;
 }
 
+tbody tr {
+  font-size: 2.5rem;
+}
+
 .delete {
   color: red;
   font-size: 2.5rem;

@@ -13,13 +13,19 @@ class Video {
 
 class UI {
 
-  addVideoToList(video) {
+  addVideoToList(video, index) {
 
+    console.log(`Index in ui.addVideoToList: ${index}`);
     const videoList = document.querySelector(".videoList");
     // Create tr element
     const row = document.createElement("tr");
     // Video id
-    let id = document.querySelector(".videoList").childElementCount + 1;
+    let id;
+    if (index === "false") {
+      id = document.querySelector(".videoList").childElementCount + 1;
+    } else {
+      id = index + 1;
+    }
 
     // Insert columns
     row.innerHTML = `
@@ -39,9 +45,11 @@ class UI {
 
   deleteVideo(target) {
     if(target.className === "delete") {
+      // remove it from the memory
       target.parentElement.remove();
-      console.log(target);
+      // remove it from the local Storage
       Store.removeVideo(target);
+      // show the success message
       ui.showAlert(`The video was deleted!`, "success");
     }
   }
@@ -123,8 +131,8 @@ class Store {
   static displayVideos() {
     const videos = Store.getVideosFromLS();
     //Looping through the videos and add it!
-    videos.forEach(function(item) {
-      ui.addVideoToList(item);
+    videos.forEach(function(item, index) {
+      ui.addVideoToList(item, index);
     });
   }
 
@@ -137,6 +145,7 @@ class Store {
   }
 
   static removeVideo(target) {
+
     const videos = Store.getVideosFromLS();
     //minus 1 because the index start at zero and the ArchivNo. start at 1.
     let compareValue = target.parentElement.cells[0].innerText-1;
@@ -146,6 +155,7 @@ class Store {
         videos.splice(index, 1);
       };
     })
+
     //rewriting localStorage
     localStorage.clear();
     localStorage.setItem("videos", JSON.stringify(videos));
@@ -177,7 +187,7 @@ document.querySelector("#submit").addEventListener("click", function(e) {
   } else {
 
     // Add video to the video list table
-    ui.addVideoToList(video);
+    ui.addVideoToList(video, "false");
 
     // Add video to LocalStorage
     Store.addVideo(video);
