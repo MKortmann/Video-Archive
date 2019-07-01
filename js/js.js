@@ -18,8 +18,12 @@ class UI {
     const videoList = document.querySelector(".videoList");
     // Create tr element
     const row = document.createElement("tr");
+    // Video id
+    let id = document.querySelector(".videoList").childElementCount + 1;
+
     // Insert columns
     row.innerHTML = `
+      <td>${id}</td>
       <td>${video.projectName}</td>
       <td>${video.videoTitle}</td>
       <td>${video.yourName}</td>
