@@ -28,10 +28,10 @@ class UI {
       <td>${video.videoTitle}</td>
       <td>${video.yourName}</td>
       <td>${video.eMail}</td>
-      <td>${video.videoDate}</td>
+      <td>${this.newDateFormat(video.videoDate)}</td>
       <td>${video.videoTime}</td>
       <td>${video.videoNo}</td>
-      <th class="delete">X</th>
+      <td class="delete">X</td>
     `;
     //append element
     videoList.appendChild(row);
@@ -73,7 +73,30 @@ class UI {
     },3000);
   }
 
+  //Writing the Date in the table in another format
+  newDateFormat(date) {
+  let stringArray = date.split("");
+  let day = [], month = [], year = [];
+  let index = 0;
+  stringArray.forEach(function(item) {
 
+    if(index === 0) {
+      year.push(item);
+    } else if (index === 1) {
+      month.push(item);
+    } else {
+      day.push(item);
+    }
+    if(item === "-") {
+      index++;
+    }
+
+  });
+  console.log(`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`);
+
+  return`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`
+
+  }
 
 };
 // ui object!
@@ -104,7 +127,7 @@ document.querySelector("#submit").addEventListener("click", function(e) {
     ui.addVideoToList(video);
 
     // Show sucess message
-    ui.showAlert("The Video was added!", "success");
+    ui.showAlert(`Dear ${video.yourName}, the video: ${video.videoTitle} was added!`, "success");
 
     // Clear Fields
     ui.clearFields();
@@ -119,3 +142,31 @@ document.querySelector("#submit").addEventListener("click", function(e) {
 document.querySelector(".videoList").addEventListener("click", function(e) {
   ui.deleteVideo(e.target);
 });
+
+// Video Date Updating
+// document.querySelector(".videoDate").addEventListener("change", function() {
+//
+//   let stringArray = this.value.split("");
+//   let day = [], month = [], year = [];
+//   let index = 0;
+//   stringArray.forEach(function(item) {
+//
+//     if(index === 0) {
+//       year.push(item);
+//     } else if (index === 1) {
+//       month.push(item);
+//     } else {
+//       day.push(item);
+//     }
+//     if(item === "-") {
+//       index++;
+//     }
+//
+//   });
+//   console.log(`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`);
+//
+//   let newDate = new Date(`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`);
+//
+//   this.value = newDate;
+//
+// });
