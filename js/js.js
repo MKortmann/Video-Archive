@@ -157,7 +157,7 @@ class Store {
     })
 
     //rewriting localStorage
-    localStorage.clear();
+    // localStorage.clear();
     localStorage.setItem("videos", JSON.stringify(videos));
   }
 
