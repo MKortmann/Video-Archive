@@ -55,13 +55,8 @@ class UI {
   }
 
   clearFields() {
-    // document.querySelector(".projectName").value = "";
-    // document.querySelector(".videoTitle").value = "";
-    // document.querySelector(".yourName").value = "";
-    // document.querySelector(".eMail").value = "";
-    // document.querySelector(".videoDate").value = "";
-    // document.querySelector(".videoTime").value = "";
-    // document.querySelector(".videoNo").value = "";
+    // clearing the form!
+    document.querySelector(".form").reset();
   }
 
   showAlert(message, className) {
@@ -161,7 +156,37 @@ class Store {
     localStorage.setItem("videos", JSON.stringify(videos));
   }
 
+  static downloadLS() {
+    const videos = Store.getVideosFromLS();
+    console.log(videos);
+
+    // Save as file
+    // let url = 'data:application/json;base64,' + btoa(videos);
+    // chrome.downloads.download({
+    //     url: url,
+    //     filename: 'VideoBackup.json'
+    // });
+
+    /*setting*/
+    // let TYPE = "storage/json";
+    //
+    // debugger
+    // const url = 'data:application/json;base64,' + btoa(videos);
+    //
+    // let dlLink = document.createElement('a');
+    // dlLink.download = "storage";
+    // dlLink.href = url;
+    // dlLink.dataset.downloadurl = [TYPE, dlLink.download, dlLink.href].join(':');
+    // /*add, click and removing*/
+    // document.body.appendChild(dlLink);
+    // dlLink.click();
+    // document.body.removeChild(dlLink);
+  }
+
 }
+
+Store.downloadLS();
+
 //DOM Load Event: Initialization!
 document.addEventListener("DOMContentLoaded", Store.displayVideos());
 
@@ -208,31 +233,3 @@ document.querySelector("#submit").addEventListener("click", function(e) {
 document.querySelector(".videoList").addEventListener("click", function(e) {
   ui.deleteVideo(e.target);
 });
-
-// Video Date Updating
-// document.querySelector(".videoDate").addEventListener("change", function() {
-//
-//   let stringArray = this.value.split("");
-//   let day = [], month = [], year = [];
-//   let index = 0;
-//   stringArray.forEach(function(item) {
-//
-//     if(index === 0) {
-//       year.push(item);
-//     } else if (index === 1) {
-//       month.push(item);
-//     } else {
-//       day.push(item);
-//     }
-//     if(item === "-") {
-//       index++;
-//     }
-//
-//   });
-//   console.log(`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`);
-//
-//   let newDate = new Date(`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`);
-//
-//   this.value = newDate;
-//
-// });
