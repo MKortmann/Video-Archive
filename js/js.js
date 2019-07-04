@@ -1,7 +1,27 @@
 let flagLoadFromJSON = false;
 
 class Video {
-  constructor(projectName, videoTitle, yourName, eMail, videoDate, videoTime, videoNo) {
+  constructor(projectName="", videoTitle="", yourName="", eMail="", videoDate="", videoTime="", videoNo="") {
+    this.projectName = projectName;
+    this.videoTitle = videoTitle;
+    this.yourName = yourName;
+    this.eMail = eMail;
+    this.videoDate = videoDate;
+    this.videoTime = videoTime;
+    this.videoNo = videoNo;
+    //variables from the local video data
+    this.videoName = "";
+    this.videoSize = "";
+    this.videoType = "";
+  }
+
+  getLocalVideoInfos(name, size, type) {
+    this.videoName = name;
+    this.videoSize = size;
+    this.videotype = type;
+  }
+
+  getFormData(projectName="", videoTitle="", yourName="", eMail="", videoDate="", videoTime="", videoNo="") {
     this.projectName = projectName;
     this.videoTitle = videoTitle;
     this.yourName = yourName;
@@ -11,6 +31,8 @@ class Video {
     this.videoNo = videoNo;
   }
 };
+
+let video = new Video();
 
 class UI {
 
@@ -181,7 +203,7 @@ class Store {
     linkElement.setAttribute('href', dataUri);
     linkElement.setAttribute('download', exportFileDefaultName);
     linkElement.click();
-    document.body.removeChild(linkElement);
+    linkElement.remove();
   }
 
   // The method XMLhttpRequest works only if you have a server installed.
@@ -242,7 +264,19 @@ document.querySelector(".downloadVideoToJSON").addEventListener("click", functio
 });
 
 document.querySelector(".openSelectVideoFile").addEventListener("click", function() {
-  alert(1);
+
+// open a file selection dialog
+  const input = document.createElement('input');
+  input.type = 'file';
+// handle the selected file
+  input.onchange = e => {
+     const file = e.target.files[0];
+     document.querySelector(".openSelectVideoFile").innerText = file.name;
+     video.getLocalVideoInfos(file.name, file.size, file.type);
+     console.log(file);
+  }
+  input.click();
+
 });
 
 Store.downloadLS();
@@ -260,8 +294,7 @@ document.querySelector("#submit").addEventListener("click", function(e) {
   const videoTime = document.querySelector(".videoTime").value;
   const videoNo = document.querySelector(".videoNo").value;
 
-  const video = new Video(projectName, videoTitle, yourName, eMail, videoDate, videoTime, videoNo);
-
+  video.getFormData(projectName, videoTitle, yourName, eMail, videoDate, videoTime, videoNo);
   console.log(video);
 
   // Validate input
