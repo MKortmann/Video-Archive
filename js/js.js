@@ -171,7 +171,8 @@ class Store {
     const videos = Store.getVideosFromLS();
     const fileJSON = JSON.stringify(videos);
 
-    let dataUri = 'data:storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
+    // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
+      let dataUri = 'data:storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
 
     let exportFileDefaultName = 'data.json';
 
@@ -196,12 +197,14 @@ class Store {
            // Convert the json to and object
            let table = JSON.parse(xhttp.responseText);
 
+           // Storing the table in the Local Storage
+           localStorage.setItem("videos", JSON.stringify(table));
+
           for(let id = 0; id < table.length; id++)
           {
            videoList = document.querySelector(".videoList");
            // Create tr element
            const row = document.createElement("tr");
-
 
            // Insert columns
            row.innerHTML = `
@@ -223,12 +226,14 @@ class Store {
       };
       xhttp.open("GET", "./storage/table.json", true);
       xhttp.send();
+
     }
 }
 
 
 document.querySelector(".LoadTableFromJSON").addEventListener("click", function() {
   Store.loadJSON();
+  location.reload();
 });
 
 document.querySelector(".downloadVideoToJSON").addEventListener("click", function() {
