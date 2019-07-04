@@ -40,7 +40,7 @@ class UI {
       <td>${this.newDateFormat(video.videoDate)}</td>
       <td>${video.videoTime}</td>
       <td>${video.videoNo}</td>
-      <td class="delete">X</td>
+      <td  class="delete">X</td>
     `;
     //append element
     videoList.appendChild(row);
@@ -202,9 +202,10 @@ class Store {
            // Create tr element
            const row = document.createElement("tr");
 
+
            // Insert columns
            row.innerHTML = `
-             <td>${table[id].id}</td>
+             <td>${id+1}</td>
              <td>${table[id].projectName}</td>
              <td>${table[id].videoTitle}</td>
              <td>${table[id].yourName}</td>
@@ -212,29 +213,11 @@ class Store {
              <td>${table[id].videoDate}</td>
              <td>${table[id].videoTime}</td>
              <td>${table[id].videoNo}</td>
-             <td>${table[id].X}</td>
+             <td  class="delete">X</td>
            `;
            //append element
            videoList.appendChild(row);
          }
-
-         /*Converting it to JSON*/
-         let newTableJSON = JSON.stringify(table);
-         console.log(newTableJSON);
-
-          /*setting*/
-          let TYPE = "./storage/json";
-          const fileJSON = newTableJSON;
-          let dlLink = document.createElement('a');
-          // file name
-          dlLink.download = "table.json";
-          // path from the file
-          dlLink.href = "./storage/table.json";
-          dlLink.dataset.downloadurl = [TYPE, dlLink.download, dlLinkvideoToJSON.href].join(':');
-          /*add, click and removing*/
-          document.body.appendChild(dlLink);
-          dlLink.click();
-          document.body.removeChild(dlLink);
 
         }
       };
