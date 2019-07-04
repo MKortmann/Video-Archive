@@ -55,7 +55,7 @@ class UI {
     // Insert columns
     row.innerHTML = `
       <!-- <td>${id} <a href="mailto:yourname@yourisp.com">Play</a></td> -->
-      <td>${id} <video width="320" height="240" controls><source src="./videos/flume.mp4" type="video/mp4"></video></td>
+      <td>${id} <video width="320" height="240" controls><source src="./videos/${video.videoName}" type="video/mp4"></video></td>
       <td>${video.projectName}</td>
       <td>${video.videoTitle}</td>
       <td>${video.yourName}</td>
