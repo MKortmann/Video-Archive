@@ -1,8 +1,40 @@
 "use strict"
 
+/**
+ * The code is composed and written in the order below:
+ * PART 1: INITIALIZATION/SETUP/STRUCTURE
+ * Class Video: create an object for each video with the specific informations
+ as project name, video title, user name and so on.
+ * Class UI: used to manipulate the DOM. Here we see important methods from the
+ user interface as addVideoToList, deleteVideo, clearFields, showAlertMessage,
+ new date format and so on.
+ * Class Store: we use here static methods to be able to call it without instatiating
+ the class. Used to store the data to Local Storage (LS) and also to JSON.
+ We see here many important methods as: getVideosFromLS, retrieveVideosFromLS,
+ addVideo, removeVideo, downloadVideosToJSON, loadJSON.
+ * PART 2: User Interface Interaction/LOGIC
+ * We see here eventListeners for the buttons as Select Videos, Submit and so on.
+ * SUBMIT BUTTON: here is where start the hole logic. We first check if the User
+ * have add all the necessary information in the inputs fields. If not the User
+ * will be alert. If yes, we do these steps:
+ * 1) Add Video To list (and update the ui)
+ * 2) Store the Video to Local Storage
+ * 3) Store the Video to a JSON file that will be direct downloaded. (Backup-Security)
+ * 4) Show the success message
+ * 5) Clear all the input fields!
+ * @summary KJP Video System concise functionality description.
+ */
 
 
+/*
+ * PART 1: INITIALIZATION/SETUP/STRUCTURE
+*/
 
+/**
+ * Creates an object video with the respective informations as
+ * project Name, title and so on.
+ * @class
+ */
 class Video {
   constructor(projectName="", videoTitle="", yourName="", videoDate="", videoTime="", videoNo="") {
     this.projectName = projectName;
@@ -32,9 +64,13 @@ class Video {
     this.videoNo = videoNo;
   }
 };
-
+//video object
 let video = new Video();
 
+/**
+ * Creates an UI object video with the necessary methods to manipulate the DOM.
+ * @class
+ */
 class UI {
 
   addVideoToList(video, index) {
@@ -134,7 +170,12 @@ class UI {
 // ui object!
 const ui = new UI();
 
-// Local Storage Class - static so we do not need to instantiate
+/**
+ * Local Storage Class - static so we do not need to instantiate
+ * retrieve, save and delete information to the local storage
+ * download JSON and LOAD JSON to the Local Storage
+ * @class
+ */
 class Store {
 
 // Get Videos from LocalStorage
@@ -230,6 +271,13 @@ class Store {
     }
 }
 
+/*
+* PART 2: User Interface Interaction/LOGIC
+*/
+/* LOAD TABLE FROM A JSON FILE
+ * As Backup it will load the JSON file! Necessary in case the Local Storage is
+ * cleared!
+*/
 document.querySelector(".loadTableFromJSON").addEventListener("click", function() {
   //removing the old table!
   // document.querySelector(".videoList").remove();
@@ -240,13 +288,21 @@ document.querySelector(".loadTableFromJSON").addEventListener("click", function(
     } while (taskList.children.length > 0);
   }
   Store.loadJSON();
-
 });
 
+/* DOWNLOAD A VIDEO TO A JSON FILE
+ * As Backup it will load the JSON file! Necessary in case the Local Storage is
+ * cleared!
+*/
 document.querySelector(".downloadVideoToJSON").addEventListener("click", function() {
   Store.downloadVideosToJSON();
 });
 
+/* OPEN A DIALOG BOX TO SELECT A VIDEO
+ * It opens a dialog box to be able to select the video to be stored. The info
+ * caputre is the name, file and size of the video.
+ * At this moment the video must be copied to the videos folder!
+*/
 document.querySelector(".openSelectVideoFile").addEventListener("click", function() {
 
 // open a file selection dialog
@@ -259,14 +315,22 @@ document.querySelector(".openSelectVideoFile").addEventListener("click", functio
      video.getLocalVideoInfos(file.name, file.size, file.type);
   }
   input.click();
-
 });
 
-// Store.downloadLS();
-
-//DOM Load Event: Initialization!
+/* DOM Load Event: Initialization!
+ * It's a very important step. Here the localStorage will be retrieve and the table
+ * list of videos will be filled.
+*/
 document.addEventListener("DOMContentLoaded", Store.displayVideos());
 
+/* SUBMIT
+ * It submit the form! Here is where the hole logic of this video archive starts.
+ * 1) Add Video To list (and update the ui)
+ * 2) Store the Video to Local Storage
+ * 3) Store the Video to a JSON file that will be direct downloaded. (Backup-Security)
+ * 4) Show the success message
+ * 5) Clear all the input fields!
+*/
 document.querySelector("#submit").addEventListener("click", function(e) {
 
   const projectName = document.querySelector(".projectName").value;
@@ -281,41 +345,31 @@ document.querySelector("#submit").addEventListener("click", function(e) {
   video.getFormData(projectName, videoTitle, yourName, videoDate, videoTime, videoNo);
 
   // Validate input
-  if(projectName === "" || videoTitle === "" || yourName === "" || videoDate === "" || videoTime === "" || videoNo === "" ) {
-
-    ui.showAlert("Please, check your inputs!", "error");
-
-  } else if (videoFile === "SELECT A VIDEO FILE" ) {
-
-    ui.showAlert("Please, select a video!", "error");
-
-  } else
-
+  if(projectName === "" || videoTitle === "" || yourName === "" || videoDate === "" || videoTime === "" || videoNo === "" )
   {
-
+    ui.showAlert("Please, check your inputs!", "error");
+  } else if (videoFile === "SELECT A VIDEO FILE" ) {
+    ui.showAlert("Please, select a video!", "error");
+  } else
+  {
     // Add video to the video list table
     ui.addVideoToList(video, "false");
-
     // Add video to LocalStorage: it will load the local storage and push the new video
     Store.addVideo(video);
-
     // Save it to JSON: extra backup! After savingToLocalStorageTheJSON file will be downlaoded.
     // It basically load the localstorage to an variable, convert it to JSON and download it.
     Store.downloadVideosToJSON();
-
     // Show sucess message
     ui.showAlert(`Dear ${video.yourName}, the video: ${video.videoTitle} was added!`, "success");
-
     // Clear Fields
     ui.clearFields();
-
   }
-
   e.preventDefault();
-
 });
-
-// delete the video
+/* DELETE THE VIDEO
+ * If the user clicked in the X field, it will clear the video and update the
+ * Local Storage. In this case, will not be generate a JSON file.
+*/
 document.querySelector(".videoList").addEventListener("click", function(e) {
   ui.deleteVideo(e.target);
 });
