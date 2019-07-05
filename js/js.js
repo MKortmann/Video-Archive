@@ -1,5 +1,3 @@
-let flagLoadFromJSON = false;
-
 class Video {
   constructor(projectName="", videoTitle="", yourName="", eMail="", videoDate="", videoTime="", videoNo="") {
     this.projectName = projectName;
@@ -195,7 +193,7 @@ class Store {
     const fileJSON = JSON.stringify(videos);
 
     // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
-      let dataUri = 'data:storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
+    let dataUri = 'data:storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
 
     let exportFileDefaultName = 'data.json';
 
@@ -218,33 +216,16 @@ class Store {
         var videoList = "";
         if (this.readyState == 4 && this.status == 200) {
            // Convert the json to and object
-           let table = JSON.parse(xhttp.responseText);
+           let videos = JSON.parse(xhttp.responseText);
+
+           //loading the table
+           //Looping through the videos and add it!
+           videos.forEach(function(item, index) {
+             ui.addVideoToList(item, index);
+           });
 
            // Storing the table in the Local Storage
-           localStorage.setItem("videos", JSON.stringify(table));
-
-          for(let id = 0; id < table.length; id++)
-          {
-           videoList = document.querySelector(".videoList");
-           // Create tr element
-           const row = document.createElement("tr");
-
-           // Insert columns
-           row.innerHTML = `
-             <td>${id+1}</td>
-             <td>${table[id].projectName}</td>
-             <td>${table[id].videoTitle}</td>
-             <td>${table[id].yourName}</td>
-             <td>${table[id].eMail}</td>
-             <td>${table[id].videoDate}</td>
-             <td>${table[id].videoTime}</td>
-             <td>${table[id].videoNo}</td>
-             <td  class="delete">X</td>
-           `;
-           //append element
-           videoList.appendChild(row);
-         }
-
+           localStorage.setItem("videos", JSON.stringify(videos));
         }
       };
       xhttp.open("GET", "./storage/table.json", true);
@@ -255,8 +236,16 @@ class Store {
 
 
 document.querySelector(".loadTableFromJSON").addEventListener("click", function() {
+  //removing the old table!
+  // document.querySelector(".videoList").remove();
+  let taskList = document.querySelector(".videoList");
+  if(taskList.children.length > 0) {
+    do {
+    taskList.children[taskList.children.length-1].remove();
+    } while (taskList.children.length > 0);
+  }
   Store.loadJSON();
-  location.reload();
+
 });
 
 document.querySelector(".downloadVideoToJSON").addEventListener("click", function() {
@@ -283,49 +272,49 @@ Store.downloadLS();
 
 //DOM Load Event: Initialization!
 document.addEventListener("DOMContentLoaded", Store.displayVideos());
-
-document.querySelector("#submit").addEventListener("click", function(e) {
-
-  const projectName = document.querySelector(".projectName").value;
-  const videoTitle = document.querySelector(".videoTitle").value;
-  const yourName = document.querySelector(".yourName").value;
-  const eMail = document.querySelector(".eMail").value;
-  const videoDate = document.querySelector(".videoDate").value;
-  const videoTime = document.querySelector(".videoTime").value;
-  const videoNo = document.querySelector(".videoNo").value;
-
-  video.getFormData(projectName, videoTitle, yourName, eMail, videoDate, videoTime, videoNo);
-  console.log(video);
-
-  // Validate input
-  if(projectName === "" || videoTitle === "" || yourName === "" || eMail === "" || videoDate === "" || videoTime === "" || videoNo === "") {
-
-    ui.showAlert("Please, check your input!", "error");
-
-  } else {
-
-    // Add video to the video list table
-    ui.addVideoToList(video, "false");
-
-    // Add video to LocalStorage
-    Store.addVideo(video);
-
-    // Save it to JSON
-    Store.downloadVideosToJSON();
-
-    // Show sucess message
-    ui.showAlert(`Dear ${video.yourName}, the video: ${video.videoTitle} was added!`, "success");
-
-    // Clear Fields
-    ui.clearFields();
-
-  }
-
-  e.preventDefault();
-
-});
-
-// delete the video
-document.querySelector(".videoList").addEventListener("click", function(e) {
-  ui.deleteVideo(e.target);
-});
+//
+// document.querySelector("#submit").addEventListener("click", function(e) {
+//
+//   const projectName = document.querySelector(".projectName").value;
+//   const videoTitle = document.querySelector(".videoTitle").value;
+//   const yourName = document.querySelector(".yourName").value;
+//   const eMail = document.querySelector(".eMail").value;
+//   const videoDate = document.querySelector(".videoDate").value;
+//   const videoTime = document.querySelector(".videoTime").value;
+//   const videoNo = document.querySelector(".videoNo").value;
+//
+//   video.getFormData(projectName, videoTitle, yourName, eMail, videoDate, videoTime, videoNo);
+//   console.log(video);
+//
+//   // Validate input
+//   if(projectName === "" || videoTitle === "" || yourName === "" || eMail === "" || videoDate === "" || videoTime === "" || videoNo === "") {
+//
+//     ui.showAlert("Please, check your input!", "error");
+//
+//   } else {
+//
+//     // Add video to the video list table
+//     ui.addVideoToList(video, "false");
+//
+//     // Add video to LocalStorage
+//     Store.addVideo(video);
+//
+//     // Save it to JSON
+//     Store.downloadVideosToJSON();
+//
+//     // Show sucess message
+//     ui.showAlert(`Dear ${video.yourName}, the video: ${video.videoTitle} was added!`, "success");
+//
+//     // Clear Fields
+//     ui.clearFields();
+//
+//   }
+//
+//   e.preventDefault();
+//
+// });
+//
+// // delete the video
+// document.querySelector(".videoList").addEventListener("click", function(e) {
+//   ui.deleteVideo(e.target);
+// });
