@@ -1,9 +1,13 @@
+"use strict"
+
+
+
+
 class Video {
-  constructor(projectName="", videoTitle="", yourName="", eMail="", videoDate="", videoTime="", videoNo="") {
+  constructor(projectName="", videoTitle="", yourName="", videoDate="", videoTime="", videoNo="") {
     this.projectName = projectName;
     this.videoTitle = videoTitle;
     this.yourName = yourName;
-    this.eMail = eMail;
     this.videoDate = videoDate;
     this.videoTime = videoTime;
     this.videoNo = videoNo;
@@ -16,14 +20,13 @@ class Video {
   getLocalVideoInfos(name, size, type) {
     this.videoName = name;
     this.videoSize = size;
-    this.videotype = type;
+    this.videoType = type;
   }
 
-  getFormData(projectName="", videoTitle="", yourName="", eMail="", videoDate="", videoTime="", videoNo="") {
+  getFormData(projectName="", videoTitle="", yourName="", videoDate="", videoTime="", videoNo="") {
     this.projectName = projectName;
     this.videoTitle = videoTitle;
     this.yourName = yourName;
-    this.eMail = eMail;
     this.videoDate = videoDate;
     this.videoTime = videoTime;
     this.videoNo = videoNo;
@@ -36,7 +39,6 @@ class UI {
 
   addVideoToList(video, index) {
 
-    console.log(`Index in ui.addVideoToList: ${index}`);
     const videoList = document.querySelector(".videoList");
     // Create tr element
     const row = document.createElement("tr");
@@ -52,12 +54,11 @@ class UI {
 
     // Insert columns
     row.innerHTML = `
-      <!-- <td>${id} <a href="mailto:yourname@yourisp.com">Play</a></td> -->
-      <td>${id} <video width="320" height="240" controls><source src="./videos/${video.videoName}" type="video/mp4"></video></td>
+      <td>${id}</td>
+      <td><video width="320" height="240" controls><source src="./videos/${video.videoName}" type="video/mp4"></video></td>
       <td>${video.projectName}</td>
       <td>${video.videoTitle}</td>
       <td>${video.yourName}</td>
-      <td>${video.eMail}</td>
       <td>${this.newDateFormat(video.videoDate)}</td>
       <td>${video.videoTime}</td>
       <td>${video.videoNo}</td>
@@ -80,7 +81,8 @@ class UI {
 
   clearFields() {
     // clearing the form!
-    // document.querySelector(".form").reset();
+    document.querySelector(".form").reset();
+    document.querySelector(".openSelectVideoFile").innerText = "SELECT A VIDEO FILE";
   }
 
   showAlert(message, className) {
@@ -122,7 +124,7 @@ class UI {
     }
 
   });
-  console.log(`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`);
+  // console.log(`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`);
 
   return`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`
 
@@ -142,7 +144,6 @@ class Store {
       videos = [];
     } else {
       videos = JSON.parse(localStorage.getItem("videos"));
-      console.log(`Getting books from the memory!`);
     }
     return videos;
   }
@@ -179,11 +180,6 @@ class Store {
     // localStorage.clear();
     localStorage.setItem("videos", JSON.stringify(videos));
   }
-
-  // static downloadLS() {
-  //   const videos = Store.getVideosFromLS();
-  //   console.log(videos);
-  // }
 
   static downloadVideosToJSON() {
     // Save as file
@@ -261,12 +257,8 @@ document.querySelector(".openSelectVideoFile").addEventListener("click", functio
      const file = e.target.files[0];
      document.querySelector(".openSelectVideoFile").innerText = file.name;
      video.getLocalVideoInfos(file.name, file.size, file.type);
-     console.log(file);
   }
   input.click();
-
-
-document.querySelector(".bSubmit").classList.remove("invisible");
 
 });
 
@@ -280,22 +272,26 @@ document.querySelector("#submit").addEventListener("click", function(e) {
   const projectName = document.querySelector(".projectName").value;
   const videoTitle = document.querySelector(".videoTitle").value;
   const yourName = document.querySelector(".yourName").value;
-  const eMail = document.querySelector(".eMail").value;
   const videoDate = document.querySelector(".videoDate").value;
   const videoTime = document.querySelector(".videoTime").value;
   const videoNo = document.querySelector(".videoNo").value;
   //Check if you have selected a file
   const videoFile = document.querySelector(".openSelectVideoFile").innerText;
 
-  video.getFormData(projectName, videoTitle, yourName, eMail, videoDate, videoTime, videoNo);
-  console.log(video);
+  video.getFormData(projectName, videoTitle, yourName, videoDate, videoTime, videoNo);
 
   // Validate input
-  if(projectName === "" || videoTitle === "" || yourName === "" || eMail === "" || videoDate === "" || videoTime === "" || videoNo === "" || videoFile === "SELECT A VIDEO FILE" ) {
+  if(projectName === "" || videoTitle === "" || yourName === "" || videoDate === "" || videoTime === "" || videoNo === "" ) {
 
-    ui.showAlert("Please, check your inputs and be sure you have selected a video file", "error");
+    ui.showAlert("Please, check your inputs!", "error");
 
-  } else {
+  } else if (videoFile === "SELECT A VIDEO FILE" ) {
+
+    ui.showAlert("Please, select a video!", "error");
+
+  } else
+
+  {
 
     // Add video to the video list table
     ui.addVideoToList(video, "false");
