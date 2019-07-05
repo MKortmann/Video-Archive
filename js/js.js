@@ -180,10 +180,10 @@ class Store {
     localStorage.setItem("videos", JSON.stringify(videos));
   }
 
-  static downloadLS() {
-    const videos = Store.getVideosFromLS();
-    console.log(videos);
-  }
+  // static downloadLS() {
+  //   const videos = Store.getVideosFromLS();
+  //   console.log(videos);
+  // }
 
   static downloadVideosToJSON() {
     // Save as file
@@ -234,7 +234,6 @@ class Store {
     }
 }
 
-
 document.querySelector(".loadTableFromJSON").addEventListener("click", function() {
   //removing the old table!
   // document.querySelector(".videoList").remove();
@@ -266,55 +265,61 @@ document.querySelector(".openSelectVideoFile").addEventListener("click", functio
   }
   input.click();
 
+
+document.querySelector(".bSubmit").classList.remove("invisible");
+
 });
 
-Store.downloadLS();
+// Store.downloadLS();
 
 //DOM Load Event: Initialization!
 document.addEventListener("DOMContentLoaded", Store.displayVideos());
-//
-// document.querySelector("#submit").addEventListener("click", function(e) {
-//
-//   const projectName = document.querySelector(".projectName").value;
-//   const videoTitle = document.querySelector(".videoTitle").value;
-//   const yourName = document.querySelector(".yourName").value;
-//   const eMail = document.querySelector(".eMail").value;
-//   const videoDate = document.querySelector(".videoDate").value;
-//   const videoTime = document.querySelector(".videoTime").value;
-//   const videoNo = document.querySelector(".videoNo").value;
-//
-//   video.getFormData(projectName, videoTitle, yourName, eMail, videoDate, videoTime, videoNo);
-//   console.log(video);
-//
-//   // Validate input
-//   if(projectName === "" || videoTitle === "" || yourName === "" || eMail === "" || videoDate === "" || videoTime === "" || videoNo === "") {
-//
-//     ui.showAlert("Please, check your input!", "error");
-//
-//   } else {
-//
-//     // Add video to the video list table
-//     ui.addVideoToList(video, "false");
-//
-//     // Add video to LocalStorage
-//     Store.addVideo(video);
-//
-//     // Save it to JSON
-//     Store.downloadVideosToJSON();
-//
-//     // Show sucess message
-//     ui.showAlert(`Dear ${video.yourName}, the video: ${video.videoTitle} was added!`, "success");
-//
-//     // Clear Fields
-//     ui.clearFields();
-//
-//   }
-//
-//   e.preventDefault();
-//
-// });
-//
-// // delete the video
-// document.querySelector(".videoList").addEventListener("click", function(e) {
-//   ui.deleteVideo(e.target);
-// });
+
+document.querySelector("#submit").addEventListener("click", function(e) {
+
+  const projectName = document.querySelector(".projectName").value;
+  const videoTitle = document.querySelector(".videoTitle").value;
+  const yourName = document.querySelector(".yourName").value;
+  const eMail = document.querySelector(".eMail").value;
+  const videoDate = document.querySelector(".videoDate").value;
+  const videoTime = document.querySelector(".videoTime").value;
+  const videoNo = document.querySelector(".videoNo").value;
+  //Check if you have selected a file
+  const videoFile = document.querySelector(".openSelectVideoFile").innerText;
+
+  video.getFormData(projectName, videoTitle, yourName, eMail, videoDate, videoTime, videoNo);
+  console.log(video);
+
+  // Validate input
+  if(projectName === "" || videoTitle === "" || yourName === "" || eMail === "" || videoDate === "" || videoTime === "" || videoNo === "" || videoFile === "SELECT A VIDEO FILE" ) {
+
+    ui.showAlert("Please, check your inputs and be sure you have selected a video file", "error");
+
+  } else {
+
+    // Add video to the video list table
+    ui.addVideoToList(video, "false");
+
+    // Add video to LocalStorage: it will load the local storage and push the new video
+    Store.addVideo(video);
+
+    // Save it to JSON: extra backup! After savingToLocalStorageTheJSON file will be downlaoded.
+    // It basically load the localstorage to an variable, convert it to JSON and download it.
+    Store.downloadVideosToJSON();
+
+    // Show sucess message
+    ui.showAlert(`Dear ${video.yourName}, the video: ${video.videoTitle} was added!`, "success");
+
+    // Clear Fields
+    ui.clearFields();
+
+  }
+
+  e.preventDefault();
+
+});
+
+// delete the video
+document.querySelector(".videoList").addEventListener("click", function(e) {
+  ui.deleteVideo(e.target);
+});
