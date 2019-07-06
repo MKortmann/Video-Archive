@@ -40,7 +40,7 @@
 
 /*
  * PART 1: INITIALIZATION/SETUP/STRUCTURE
-*/
+ */
 
 /**
  * Creates an object video with the respective informations as
@@ -48,7 +48,7 @@
  * @class
  */
 class Video {
-  constructor(projectName="", videoTitle="", yourName="", videoDate="", videoTime="", videoNo="") {
+  constructor(projectName = "", videoTitle = "", yourName = "", videoDate = "", videoTime = "", videoNo = "") {
     this.projectName = projectName;
     this.videoTitle = videoTitle;
     this.yourName = yourName;
@@ -67,7 +67,7 @@ class Video {
     this.videoType = type;
   }
 
-  getFormData(projectName="", videoTitle="", yourName="", videoDate="", videoTime="", videoNo="") {
+  getFormData(projectName = "", videoTitle = "", yourName = "", videoDate = "", videoTime = "", videoNo = "") {
     this.projectName = projectName;
     this.videoTitle = videoTitle;
     this.yourName = yourName;
@@ -117,7 +117,7 @@ class UI {
   }
 
   deleteVideo(target) {
-    if(target.className === "delete") {
+    if (target.className === "delete") {
       // remove it from the memory
       target.parentElement.remove();
       // remove it from the local Storage
@@ -150,31 +150,33 @@ class UI {
     //the message should disappear after 3 seconds
     setTimeout(function() {
       document.querySelector(".alert").remove();
-    },3000);
+    }, 3000);
   }
 
   //Writing the Date in the table in another format
   newDateFormat(date) {
-  let stringArray = date.split("");
-  let day = [], month = [], year = [];
-  let index = 0;
-  stringArray.forEach(function(item) {
+    let stringArray = date.split("");
+    let day = [],
+      month = [],
+      year = [];
+    let index = 0;
+    stringArray.forEach(function(item) {
 
-    if(index === 0) {
-      year.push(item);
-    } else if (index === 1) {
-      month.push(item);
-    } else {
-      day.push(item);
-    }
-    if(item === "-") {
-      index++;
-    }
+      if (index === 0) {
+        year.push(item);
+      } else if (index === 1) {
+        month.push(item);
+      } else {
+        day.push(item);
+      }
+      if (item === "-") {
+        index++;
+      }
 
-  });
-  // console.log(`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`);
+    });
+    // console.log(`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`);
 
-  return`${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`
+    return `${day[0]}${day[1]} / ${month[0]}${month[1]} / ${year[0]}${year[1]}${year[2]}${year[3]}`
 
   }
 
@@ -190,10 +192,10 @@ const ui = new UI();
  */
 class Store {
 
-// Get Videos from LocalStorage
+  // Get Videos from LocalStorage
   static getVideosFromLS() {
     let videos;
-    if(localStorage.getItem("videos") === null) {
+    if (localStorage.getItem("videos") === null) {
       videos = [];
     } else {
       videos = JSON.parse(localStorage.getItem("videos"));
@@ -209,7 +211,7 @@ class Store {
     });
   }
 
-// Add Video to localStorage
+  // Add Video to localStorage
   static addVideo(video) {
     const videos = Store.getVideosFromLS();
     // add to LocalStorage
@@ -221,10 +223,10 @@ class Store {
 
     const videos = Store.getVideosFromLS();
     //minus 1 because the index start at zero and the ArchivNo. start at 1.
-    let compareValue = target.parentElement.cells[0].innerText-1;
+    let compareValue = target.parentElement.cells[0].innerText - 1;
 
     videos.forEach(function(item, index) {
-      if(compareValue == index) {
+      if (compareValue == index) {
         videos.splice(index, 1);
       };
     })
@@ -242,7 +244,7 @@ class Store {
     const fileJSON = JSON.stringify(videos);
 
     // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
-    let dataUri = 'data:storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
+    let dataUri = 'data:storage/json;charset=utf-8,' + encodeURIComponent(fileJSON);
 
     let exportFileDefaultName = 'data.json';
 
@@ -257,46 +259,46 @@ class Store {
   // easier way: go to your project file throught prompt command and type:
   // npm install -g live-server
   // run it typing: live-server
-  static  loadJSON() {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        // readyState 4: the response has been capture and can be used
-        // status: http status of 200 means that everything is ok
-        var videoList = "";
-        if (this.readyState == 4 && this.status == 200) {
-           // Convert the json to and object
-           let videos = JSON.parse(xhttp.responseText);
+  static loadJSON() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      // readyState 4: the response has been capture and can be used
+      // status: http status of 200 means that everything is ok
+      var videoList = "";
+      if (this.readyState == 4 && this.status == 200) {
+        // Convert the json to and object
+        let videos = JSON.parse(xhttp.responseText);
 
-           //loading the table
-           //Looping through the videos and add it!
-           videos.forEach(function(item, index) {
-             ui.addVideoToList(item, index);
-           });
+        //loading the table
+        //Looping through the videos and add it!
+        videos.forEach(function(item, index) {
+          ui.addVideoToList(item, index);
+        });
 
-           // Storing the table in the Local Storage
-           localStorage.setItem("videos", JSON.stringify(videos));
-        }
-      };
-      xhttp.open("GET", "./storage/table.json", true);
-      xhttp.send();
+        // Storing the table in the Local Storage
+        localStorage.setItem("videos", JSON.stringify(videos));
+      }
+    };
+    xhttp.open("GET", "./storage/table.json", true);
+    xhttp.send();
 
-    }
+  }
 }
 
 /*
-* PART 2: User Interface Interaction/LOGIC
-*/
+ * PART 2: User Interface Interaction/LOGIC
+ */
 /* LOAD TABLE FROM A JSON FILE
  * As Backup it will load the JSON file! Necessary in case the Local Storage is
  * cleared!
-*/
+ */
 document.querySelector(".loadTableFromJSON").addEventListener("click", function() {
   //removing the old table!
   // document.querySelector(".videoList").remove();
   let taskList = document.querySelector(".videoList");
-  if(taskList.children.length > 0) {
+  if (taskList.children.length > 0) {
     do {
-    taskList.children[taskList.children.length-1].remove();
+      taskList.children[taskList.children.length - 1].remove();
     } while (taskList.children.length > 0);
   }
   Store.loadJSON();
@@ -305,7 +307,7 @@ document.querySelector(".loadTableFromJSON").addEventListener("click", function(
 /* DOWNLOAD A VIDEO TO A JSON FILE
  * As Backup it will load the JSON file! Necessary in case the Local Storage is
  * cleared!
-*/
+ */
 document.querySelector(".downloadVideoToJSON").addEventListener("click", function() {
   Store.downloadVideosToJSON();
 });
@@ -314,17 +316,17 @@ document.querySelector(".downloadVideoToJSON").addEventListener("click", functio
  * It opens a dialog box to be able to select the video to be stored. The info
  * caputre is the name, file and size of the video.
  * At this moment the video must be copied to the videos folder!
-*/
+ */
 document.querySelector(".openSelectVideoFile").addEventListener("click", function() {
 
-// open a file selection dialog
+  // open a file selection dialog
   const input = document.createElement('input');
   input.type = 'file';
-// handle the selected file
+  // handle the selected file
   input.onchange = e => {
-     const file = e.target.files[0];
-     document.querySelector(".openSelectVideoFile").innerText = file.name;
-     video.getLocalVideoInfos(file.name, file.size, file.type);
+    const file = e.target.files[0];
+    document.querySelector(".openSelectVideoFile").innerText = file.name;
+    video.getLocalVideoInfos(file.name, file.size, file.type);
   }
   input.click();
 });
@@ -332,7 +334,7 @@ document.querySelector(".openSelectVideoFile").addEventListener("click", functio
 /* DOM Load Event: Initialization!
  * It's a very important step. Here the localStorage will be retrieve and the table
  * list of videos will be filled.
-*/
+ */
 document.addEventListener("DOMContentLoaded", Store.displayVideos());
 
 /* SUBMIT
@@ -342,7 +344,7 @@ document.addEventListener("DOMContentLoaded", Store.displayVideos());
  * 3) Store the Video to a JSON file that will be direct downloaded. (Backup-Security)
  * 4) Show the success message
  * 5) Clear all the input fields!
-*/
+ */
 document.querySelector("#submit").addEventListener("click", function(e) {
 
   const projectName = document.querySelector(".projectName").value;
@@ -357,13 +359,11 @@ document.querySelector("#submit").addEventListener("click", function(e) {
   video.getFormData(projectName, videoTitle, yourName, videoDate, videoTime, videoNo);
 
   // Validate input
-  if(projectName === "" || videoTitle === "" || yourName === "" || videoDate === "" || videoTime === "" || videoNo === "" )
-  {
+  if (projectName === "" || videoTitle === "" || yourName === "" || videoDate === "" || videoTime === "" || videoNo === "") {
     ui.showAlert("Please, check your inputs!", "error");
-  } else if (videoFile === "SELECT A VIDEO FILE" ) {
+  } else if (videoFile === "SELECT A VIDEO FILE") {
     ui.showAlert("Please, select a video!", "error");
-  } else
-  {
+  } else {
     // Add video to the video list table
     ui.addVideoToList(video, "false");
     // Add video to LocalStorage: it will load the local storage and push the new video
@@ -381,7 +381,7 @@ document.querySelector("#submit").addEventListener("click", function(e) {
 /* DELETE THE VIDEO
  * If the user clicked in the X field, it will clear the video and update the
  * Local Storage. In this case, will not be generate a JSON file.
-*/
+ */
 document.querySelector(".videoList").addEventListener("click", function(e) {
   ui.deleteVideo(e.target);
 });
