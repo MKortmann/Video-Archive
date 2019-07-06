@@ -1,4 +1,15 @@
 "use strict"
+//TODO:
+// 1) design improve with flexBox!
+// 2) button to remove the form and add it again
+// 3) button to change the order of displayed video
+// 4) able to reedit the entered informations
+// 5) ablet to refill the inputs with the last add or clicke information
+// 6) Future: load videos from json: it should open a new window with the table of saves file.
+// the user should click it and it will be reload from this data.
+// Now should be able to open a window to select the specific file.
+// 7) run a bat file
+
 
 /**
  * The code is composed and written in the order below:

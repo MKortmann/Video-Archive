@@ -1,63 +1,12 @@
-label {
-  font-size: 3rem;
-}
-
-input {
-  font-size: 2.0rem;
-}
-
-table thead {
-  font-size: 2.5rem;
-  color: gray;
-  color: darkslategray;
-  color: firebrick;
-  color: crimson;
-  color: black;
-  color: saddlebrown;
-  color: #33C3F0;
-}
-
-tbody tr:nth-child(even) {
-	background-color: #9da3b0;
-  background-color: #33C3F0;
-}
-
-tbody tr:nth-child(odd) {
-	background-color: white;
-}
-
-tbody tr {
-  font-size: 2.5rem;
-}
-
-.delete {
-  color: red;
-  font-size: 2.5rem;
-  cursor: pointer;
-}
-.success, .error {
-  color: white;
-  font-size: 2.5rem;
-}
-
-.success {
-  background: green;
-  /* background: #33C3F0; */
-  background: seaGreen;
-  text-align: center;
-}
-
-.error {
-  background: red;
-  text-align: center;
-}
-
+/*Part: 0: General Rules, starting from top of html to botton*/
+/*
+ * HEADER
+*/
 h1 {
   text-align: center;
   color: firebrick;
   color: #33C3F0;
 }
-
 /*h1 Second Style*/
 .shadowText {
 color: black;
@@ -84,8 +33,48 @@ text-shadow:
   -13px 13px 1px #dbdad9,
   -14px 14px 1px #e2e0df;
 }
-
-/* Making the videoDate format as from skeleton */
+/*
+ * Buttons: user interface
+*/
+/*
+ * Messages to the user
+*/
+/* used to be the X symbol. Used to detect when the user have clicked here */
+.delete {
+  color: red;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+/* standard for messages */
+.success, .error {
+  color: white;
+  font-size: 2.5rem;
+}
+/* success message */
+.success {
+  background: green;
+  /* background: #33C3F0; */
+  background: seaGreen;
+  text-align: center;
+}
+/* error message */
+.error {
+  background: red;
+  text-align: center;
+}
+/*
+ * FORM: input data
+*/
+.container {
+  max-width: 100%;
+}
+label {
+  font-size: 3rem;
+}
+input {
+  font-size: 2.0rem;
+}
+/* Making the video Date & Time format as from skeleton */
 .videoDate,
 .videoTime {
   height: 38px;
@@ -100,7 +89,29 @@ text-shadow:
   font-size: 20px;
   height: 60px;
 }
-
-.container {
-  max-width: 100%;
+/*
+ * TABLE: list of videos (we will use in fact flexbox here)
+*/
+table thead {
+  font-size: 2.5rem;
+  color: #33C3F0;
+  color: black;
+}
+tbody tr:nth-child(even) {
+	background-color: #9da3b0;
+  background-color: #33C3F0;
+}
+tbody tr:nth-child(odd) {
+	background-color: white;
+}
+tbody tr {
+  font-size: 2.5rem;
+}
+tbody {
+      border: 1px solid black;
+}
+table,
+th,
+td {
+  border: 1px solid #33C3F0;
 }
