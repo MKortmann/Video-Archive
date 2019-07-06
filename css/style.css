@@ -76,6 +76,10 @@ h1 {
   max-width: 100%;
 }
 
+form {
+  margin-bottom: 0;
+}
+
 label {
   font-size: 3rem;
 }
@@ -127,17 +131,39 @@ tbody {
   border: 1px solid black;
 }
 
+/* color: gray;
+color: darkslategray;
+color: firebrick;
+color: crimson;
+color: black;
+color: saddlebrown;
+color: #33C3F0; */
+
 table,
 th,
 td {
   border: 1px solid #33C3F0;
+  border: 1px solid saddlebrown;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
 }
+
+td {
+  padding: 0;
+  margin: 0;
+}
+
+/* video {
+  padding: 0;
+  border: 0;
+} */
 
 footer {
   position: fixed;
   bottom: 0;
-  width: 99.1%;
-  background-color: #33C3F0;
+  width: 100%;
+  background-color: white;
   text-align: center;
   color: black;
   border-top: 1px solid #33C3F0;
