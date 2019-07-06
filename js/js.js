@@ -1,7 +1,5 @@
 "use strict"
 //TODO:
-// Add footer
-// 1) design improve with flexBox!
 // 2) button to remove the form and add it again
 // 3) button to change the order of displayed video
 // 4) able to reedit the entered informations
@@ -330,6 +328,20 @@ document.querySelector(".openSelectVideoFile").addEventListener("click", functio
   }
   input.click();
 });
+
+/* REMOVE FORM FOR BETTER TABLE VISUALIZATION
+ * It toogles the form to be allowed to see only the table on the screen
+ */
+ document.querySelector(".toggleContainer").addEventListener("click", function() {
+   if(document.querySelector(".container").classList.contains("openClose"))
+   {
+     document.querySelector(".toggleContainer").innerText = "Remove the input form";
+     document.querySelector(".container").classList.toggle("openClose");
+   } else {
+     document.querySelector(".toggleContainer").innerText = "Add the input form";
+     document.querySelector(".container").classList.toggle("openClose");
+   }
+ });
 
 /* DOM Load Event: Initialization!
  * It's a very important step. Here the localStorage will be retrieve and the table
