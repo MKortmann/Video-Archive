@@ -347,32 +347,32 @@ document.querySelector(".openSelectVideoFile").addEventListener("click", functio
  });
 
 
-document.querySelector(".runBat").addEventListener("click", function() {
-  // var wshShell = new ActiveXObject("WScript.Shell");
-  // wshShell.Run("C:\\Git_Repository\\Video-Archive\\bat\\run.bat");
-
-  // var oShell = WScript.CreateObject("WScript.Shell");
-  // console.log(oShell);
-  // oShell.Exec("start D:\dir\user.bat");
-
-  // <a href="#file.bat">Batch File</a>
-
-
-  // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
-  // let dataUri = '#run.bat';
-  let dataUri = 'run.bat';
-
-  // let exportFileDefaultName = 'user.bat';
-
-  let linkElement = document.createElement('a');
-  linkElement.setAttribute('href', dataUri);
-  // linkElement.setAttribute('download', exportFileDefaultName);
-  linkElement.click();
-  linkElement.remove();
-
-  console.log("clicked!");
-
-})
+// document.querySelector(".runBat").addEventListener("click", function() {
+//   // var wshShell = new ActiveXObject("WScript.Shell");
+//   // wshShell.Run("C:\\Git_Repository\\Video-Archive\\bat\\run.bat");
+//
+//   // var oShell = WScript.CreateObject("WScript.Shell");
+//   // console.log(oShell);
+//   // oShell.Exec("start D:\dir\user.bat");
+//
+//   // <a href="#file.bat">Batch File</a>
+//
+//
+//   // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
+//   // let dataUri = '#run.bat';
+//   let dataUri = 'run.bat';
+//
+//   // let exportFileDefaultName = 'user.bat';
+//
+//   let linkElement = document.createElement('a');
+//   linkElement.setAttribute('href', dataUri);
+//   // linkElement.setAttribute('download', exportFileDefaultName);
+//   linkElement.click();
+//   linkElement.remove();
+//
+//   console.log("clicked!");
+//
+// });
 
 /* DOM Load Event: Initialization!
  * It's a very important step. Here the localStorage will be retrieve and the table
