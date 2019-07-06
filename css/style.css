@@ -159,13 +159,22 @@ td {
   border: 1px solid Peru;
   border: 1px solid RosyBrown;
   text-align: center;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-td {
   padding: 0;
   margin: 0;
+}
+
+/* Flexbox was very important here to be able to let the video in the middle+
+center of the table */
+.videoFlex {
+  /* width: 320px; */
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+}
+/* we use flex 1 to be able to stretch the video! */
+td video {
+  flex: 1;
 }
 
 footer {
