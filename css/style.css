@@ -115,3 +115,13 @@ th,
 td {
   border: 1px solid #33C3F0;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 99.1%;
+  background-color: #33C3F0;
+  text-align: center;
+  color: black;
+  border-top: 1px solid #33C3F0;
+}

@@ -1,5 +1,6 @@
 "use strict"
 //TODO:
+// Add footer
 // 1) design improve with flexBox!
 // 2) button to remove the form and add it again
 // 3) button to change the order of displayed video

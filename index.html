@@ -6,81 +6,82 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./lib/skeleton.css">
   <link rel="stylesheet" href="./css/style.css">
-  <title>KJP-Video</title>
+  <title>KJP Video System</title>
 </head>
 <body>
 
   <h1 class="shadowText">KJP Video System</h1>
+  <!-- UI interface -->
   <button class="downloadVideoToJSON">Download Videos To JSON</button>
   <button class="loadTableFromJSON">Load Videos From JSON</button>
   <button class="openSelectVideoFile">Select a Video File</button>
-
+  <!-- Container for the form -->
   <div class="container u-full-width">
     <!-- Input Form -->
     <form class="form">
       <!-- Project Name & Video Title & Your Name -->
       <div class=row>
         <div class="four columns">
-          <label for="title" class="u-pull-left">Project Name</label>
+          <label class="u-pull-left">Project Name</label>
           <input type="text" class="u-full-width projectName" placeholder="Insert your project name">
         </div>
         <div class="four columns">
-          <label for="title" class="u-pull-left">Video Title</label>
+          <label class="u-pull-left">Video Title</label>
           <input type="text" class="u-full-width videoTitle" placeholder="Insert your title for this video">
         </div>
         <div class="four columns">
-          <label>Your Name</label>
-          <input type="text" class="u-full-width yourName" placeholder="Insert your name">
+          <label>Your Full Name</label>
+          <input type="text" class="u-full-width yourName" placeholder="Insert your full name: Firstname, Lastname">
         </div>
       </div>
       <!-- Date, Time and Video Number -->
       <div class="row">
         <div class="four columns">
-          <label for="date">Date</label>
-          <input type="date" class="u-full-width videoDate" placeholder="01.01.2019">
+          <label>Date</label>
+          <input type="date" class="u-full-width videoDate">
         </div>
         <div class="four columns">
-          <label for="time">Time</label>
-          <input type="time" class="u-full-width videoTime" placeholder="10:00">
+          <label>Time</label>
+          <input type="time" class="u-full-width videoTime">
         </div>
         <div class="four columns">
-          <label for="number">Video No.</label>
+          <label>Video No.</label>
           <input type="number" min="1" max="100" class="u-full-width videoNo" placeholder="1">
         </div>
       </div>
+      <div>
       <input class="button-primary u-full-width" id="submit" type="submit" >
       </div>
     </form>
   </div>
-
-  <!-- <input class="button-primary" id="file" type="file"> -->
-
   <!-- <p><a href="mailto:yourname@yourisp.com">Send me an email!</a></p> -->
-
   <div class="container2">
     <table class="u-full-width">
       <thead>
-        <th>ID</th>
-        <th>Video</th>
-        <th>Project Name</th>
-        <th>Video Title</th>
-        <th>Name</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Video No.</th>
-        <th></th>
+        <tr>
+          <th>ID</th>
+          <th>Video</th>
+          <th>Project Name</th>
+          <th>Video Title</th>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Video No.</th>
+          <th>X</th>
+        </tr>
       </thead>
-      <tbody class="videoList"></tbody>
+      <tbody class="videoList">
       <!--
         <tr>
-          <td></td>*7
+          <td></td>*9
         </tr>
-
        -->
+       </tbody>
     </table>
+    <footer>
+      Video System - Developed by Marcelo Kortmann (2019)
+    </footer>
   </div>
-
-
 <script src="./js/js.js"></script>
 </body>
 </html>
