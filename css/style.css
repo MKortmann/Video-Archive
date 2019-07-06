@@ -136,10 +136,13 @@ table thead {
 tbody tr:nth-child(even) {
   background-color: #9da3b0;
   background-color: #33C3F0;
+  /* font-weight: bold; */
+  /* color: white; */
 }
 
 tbody tr:nth-child(odd) {
   background-color: white;
+  /* font-weight: bold; */
 }
 
 tbody tr {
@@ -184,5 +187,5 @@ footer {
   background-color: white;
   text-align: center;
   color: black;
-  border-top: 1px solid #33C3F0;
+  /* border-top: 1px solid #33C3F0; */
 }

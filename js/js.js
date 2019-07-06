@@ -9,6 +9,8 @@
 // Now should be able to open a window to select the specific file.
 // 7) run a bat file
 
+// In browser you can change where to download the file And also to execute it
+// automatically after download it.
 
 /**
  * The code is composed and written in the order below:
@@ -357,7 +359,8 @@ document.querySelector(".runBat").addEventListener("click", function() {
 
 
   // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
-  let dataUri = '#/bat/run.bat';
+  // let dataUri = '#run.bat';
+  let dataUri = 'run.bat';
 
   // let exportFileDefaultName = 'user.bat';
 
