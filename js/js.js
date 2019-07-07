@@ -126,6 +126,10 @@ class UI {
       // show the success message
       ui.showAlert(`The video was deleted!`, "success");
     }
+
+    // Save it to JSON: extra backup! After savingToLocalStorageTheJSON file will be downlaoded.
+    // It basically load the localstorage to an variable, convert it to JSON and download it.
+    Store.downloadVideosToJSON();
   }
 
   clearFields() {
