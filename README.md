@@ -16,12 +16,16 @@ basically with only 400 lines of code.
     
     * The app has an incredible user-friendly interface! 
     * **Responsive Design**
+    * Remove and Add input form
+    * Any submit or delete is automatically saved as backup in a JSON file
  
 ## In Development
 
-  - Design improvements!
-  - More features: I will add a posibility to call a bat file that can do some managements from files if necessary! I will add some zoom,
-  reflow of the table, reload of information.
+  - if Local Storage empty, download it directly from a JSON file.
+  - popUp to let the user to select a JSON file.
+  - reedit the specification of any uploaded video
+  - reload the input box with the last added specification
+  - improve time & date inputs
 
 ## How to start the App?
 
