@@ -1,16 +1,11 @@
 "use strict"
 //TODO:
-// 2) button to remove the form and add it again
 // 3) button to change the order of displayed video
 // 4) able to reedit the entered informations
-// 5) ablet to refill the inputs with the last add or clicke information
+// 5) ablet to refill the inputs with the last add or clickesd information
 // 6) Future: load videos from json: it should open a new window with the table of saves file.
 // the user should click it and it will be reload from this data.
 // Now should be able to open a window to select the specific file.
-// 7) run a bat file
-
-// In browser you can change where to download the file And also to execute it
-// automatically after download it.
 
 /**
  * The code is composed and written in the order below:
@@ -216,10 +211,14 @@ class Store {
     });
 
     // IMPORTANT: here download the JSON file automatically in case there is no
-    // video in the Local Storage!!! 
-    if(videos.length === 0) {
-      Store.loadJSON();
-    }
+    // video in the Local Storage!!!
+    //In case of a server you can always ignore IGNORE THE LOCAL STORAGE
+    //AND DOWNLOAD FILES FROM JSON... TODO: CHECK IT!
+    // ////////////////////////////////////////////////////////////////////////////
+    // if(videos.length === 0) {
+    //   Store.loadJSON();
+    // }
+    // ///////////////////////////////////////////////////////////////////////////
   }
 
   // Add Video to localStorage
@@ -257,7 +256,7 @@ class Store {
     // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
     let dataUri = 'data:storage/json;charset=utf-8,' + encodeURIComponent(fileJSON);
 
-    let exportFileDefaultName = 'data.json';
+    let exportFileDefaultName = 'table.json';
 
     let linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
@@ -326,7 +325,8 @@ document.querySelector(".downloadVideoToJSON").addEventListener("click", functio
 
 /* OPEN A DIALOG BOX TO SELECT A VIDEO
  * It opens a dialog box to be able to select the video to be stored. The info
- * caputre is the name, file and size of the video.
+ * capture is the name, file and size of the video. The videos should be always in
+ * a specific folder already defined. In this case ./videos/*.mp4
  * At this moment the video must be copied to the videos folder!
  */
 document.querySelector(".openSelectVideoFile").addEventListener("click", function() {
@@ -346,18 +346,19 @@ document.querySelector(".openSelectVideoFile").addEventListener("click", functio
 /* REMOVE FORM FOR BETTER TABLE VISUALIZATION
  * It toogles the form to be allowed to see only the table on the screen
  */
- document.querySelector(".toggleContainer").addEventListener("click", function() {
-   if(document.querySelector(".container").classList.contains("openClose"))
-   {
-     document.querySelector(".toggleContainer").innerText = "Remove the input form";
-     document.querySelector(".container").classList.toggle("openClose");
-   } else {
-     document.querySelector(".toggleContainer").innerText = "Add the input form";
-     document.querySelector(".container").classList.toggle("openClose");
-   }
- });
+document.querySelector(".toggleContainer").addEventListener("click", function() {
+  if (document.querySelector(".container").classList.contains("openClose")) {
+    document.querySelector(".toggleContainer").innerText = "Remove the input form";
+    document.querySelector(".container").classList.toggle("openClose");
+  } else {
+    document.querySelector(".toggleContainer").innerText = "Add the input form";
+    document.querySelector(".container").classList.toggle("openClose");
+  }
+});
 
 
+// IMPOSSIBLE: IT'S BLOCKED! YOU CAN NOT RUN A BAT;EXE;CMD DATEI DIRECT FROM CLIENT
+// WE WILL NEED TO USE NODE.JS
 // document.querySelector(".runBat").addEventListener("click", function() {
 //   // var wshShell = new ActiveXObject("WScript.Shell");
 //   // wshShell.Run("C:\\Git_Repository\\Video-Archive\\bat\\run.bat");
@@ -371,7 +372,7 @@ document.querySelector(".openSelectVideoFile").addEventListener("click", functio
 //
 //   // let dataUri = 'data:./storage/json;charset=utf-8,'+ encodeURIComponent(fileJSON);
 //   // let dataUri = '#run.bat';
-//   let dataUri = 'run.bat';
+//   let dataUri = 'run.cmd';
 //
 //   // let exportFileDefaultName = 'user.bat';
 //
@@ -426,7 +427,7 @@ document.querySelector("#submit").addEventListener("click", function(e) {
     // It basically load the localstorage to an variable, convert it to JSON and download it.
     Store.downloadVideosToJSON();
     // Show sucess message
-    ui.showAlert(`Dear ${video.yourName}, the video: ${video.videoTitle} was added!`, "success");
+    ui.showAlert(`Dear ${video.yourName}, the video: ${video.videoTitle} has been added!`, "success");
     // Clear Fields
     ui.clearFields();
   }
