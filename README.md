@@ -18,12 +18,12 @@ basically with only 400 lines of code.
     * **Responsive Design**
     * Remove and Add input form
     * Any submit or delete is automatically saved as backup in a JSON file
+    * If Local Storage is empty, load a JSON file
  
 ## In Development
 
-  - if Local Storage empty, download it directly from a JSON file.
   - popUp to let the user to select a JSON file.
-  - reedit the specification of any uploaded video
+  - re-edit the specification of any uploaded video
   - reload the input box with the last added specification
   - improve time & date inputs
 
@@ -33,6 +33,7 @@ basically with only 400 lines of code.
  https://mkortmann.github.io/Video-Archive/
  
  I really advise you to install the app! To do so, please, follow the instructions at Installation section. 
+ **I advise you to install the program only in one pc and let the people access this pc remotely or locally with a local account!** The videos should be at an ordner in a server (to be edited in the js file (line 102) and the JSON file locally but also copied daily to a server. Security reasons in case of computer crash.
  
 ## What make this app so different?
 
