@@ -214,6 +214,12 @@ class Store {
     videos.forEach(function(item, index) {
       ui.addVideoToList(item, index);
     });
+
+    // IMPORTANT: here download the JSON file automatically in case there is no
+    // video in the Local Storage!!! 
+    if(videos.length === 0) {
+      Store.loadJSON();
+    }
   }
 
   // Add Video to localStorage
@@ -282,6 +288,7 @@ class Store {
 
         // Storing the table in the Local Storage
         localStorage.setItem("videos", JSON.stringify(videos));
+
       }
     };
     xhttp.open("GET", "./storage/table.json", true);
