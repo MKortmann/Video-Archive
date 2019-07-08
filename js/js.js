@@ -271,11 +271,15 @@ class Store {
   // run it typing: live-server
   static loadJSON() {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    // we will use now onload instead of onreadystatechange. So we do not need
+    // to check for this.readyState
+    xhttp.onload = function() {
+    // xhttp.onreadystatechange = function() {
       // readyState 4: the response has been capture and can be used
       // status: http status of 200 means that everything is ok
       var videoList = "";
-      if (this.readyState == 4 && this.status == 200) {
+      // if (this.readyState == 4 && this.status == 200) {
+      if (this.status == 200) {
         // Convert the json to and object
         let videos = JSON.parse(xhttp.responseText);
 
