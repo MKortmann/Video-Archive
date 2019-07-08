@@ -7,7 +7,7 @@ Looking to the point from the programmer, I developed it simple as possible usin
   * javascript
  
  **You do not need a databank! No Node.JS, No PHP, Nothing! The code store the necessary information in LocalStorage and for security 
-    exports it to a JSON file. In case your local storage is cleared, you can simple load it from JSON.**
+    exports it to a JSON file. In case your local storage is cleared, you can simple load it from JSON.** We are using XmlHttpRequest (XHR) object to get the data from the computer that in this case is/can be your server.
    
 I used only one library called: skeleton. It is: a dead simple, responsive boilerplate. It is composed 
 basically with only 400 lines of code.
