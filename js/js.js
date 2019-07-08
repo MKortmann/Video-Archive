@@ -274,7 +274,7 @@ class Store {
     // we will use now onload instead of onreadystatechange. So we do not need
     // to check for this.readyState
     xhttp.onload = function() {
-    // xhttp.onreadystatechange = function() {
+      // xhttp.onreadystatechange = function() {
       // readyState 4: the response has been capture and can be used
       // status: http status of 200 means that everything is ok
       var videoList = "";
@@ -295,6 +295,10 @@ class Store {
       }
     };
     xhttp.open("GET", "./storage/table.json", true);
+
+    xhttp.onerror = function() {
+      console.log("Request error in XMLHttpRequest...");
+    }
     xhttp.send();
 
   }
