@@ -422,7 +422,7 @@ document.querySelector("#submit").addEventListener("click", function(e) {
   video.getFormData(projectName, videoTitle, yourName, videoDate, videoTime, videoNo);
 
   // Validate input
-  if (projectName === "" || videoTitle === "" || yourName === "" || videoDate === "" || videoTime === "" || videoNo === "") {
+  if (!validateProjectName(projectName) || !validateVideoTitle(videoTitle) || !validateYourName(yourName) || !validateDate(videoDate) || !validateTime(videoTime) || !validateVideoNo(videoNo)) {
     ui.showAlert("Please, check your inputs!", "error");
   } else if (videoFile === "SELECT A VIDEO FILE") {
     ui.showAlert("Please, select a video!", "error");
@@ -448,3 +448,66 @@ document.querySelector("#submit").addEventListener("click", function(e) {
 document.querySelector(".videoList").addEventListener("click", function(e) {
   ui.deleteVideo(e.target);
 });
+
+/*
+***REGULAR EXPRESSIONS TO VALIDATE THE INPUT!!!!
+*/
+// Validate functions to check the inputs: Using Regular expressions
+// ProjectName should be only carachters from min. 3 to max. 12.
+function validateProjectName(projectName) {
+  const re = /^[a-zA-Z]{3,12}$/;
+  if(!re.test(projectName)) {
+    ui.showAlert("Please, the project name must be between 3 and 12 characters", "error");
+  } else {
+    return true;
+  }
+}
+
+// videoTitle should be only carachters from min. 3 to max. 12.
+function validateVideoTitle(videoTitle) {
+  const re = /^[a-zA-Z]{3,10}$/;
+  if(!re.test(videoTitle)) {
+    ui.showAlert("Please, the video title must be between 3 and 10 characters", "error");
+  } else {
+    return true;
+  }
+}
+// yourName should be only carachters the firstname, lastname FORMAT!!!
+function validateYourName(yourName) {
+  const re = /^([a-zA-Z]{3,10})\,[ ]([a-zA-Z]{3,10})$/;
+  if(!re.test(yourName)) {
+    ui.showAlert("Please, your name should be written in this format: firstname, lastname! The first and lastname must be between 3 and 10 characters!", "error");
+  } else {
+    return true;
+  }
+}
+// videoDate should be in the format mm/dd/yyyy
+function validateDate(videoDate) {
+  // We check this format here: "2019-07-05"
+  const re = /^\d{4}[-]\d{2}[-]\d{2}$/;
+  if(!re.test(videoDate)) {
+    ui.showAlert("Please, the date should be in the format mm/dd/yyyy", "error");
+  } else {
+    return true;
+  }
+}
+// videoTime should be in the format dd:dd
+function validateTime(videoTime) {
+  // We check this format here: "01:01"
+  const re = /^\d{2}[:]\d{2}$/;
+  if(!re.test(videoTime)) {
+    ui.showAlert("Please, the time should be in the format dd:dd", "error");
+  } else {
+    return true;
+  }
+}
+// videoTime should be in the format dd:dd
+function validateVideoNo(videoNo) {
+  // We check that the video number should have max. 4 digits!
+  const re = /^\d{1,4}$/;
+  if(!re.test(videoNo)) {
+    ui.showAlert("Please, the video number must be between 1 and 9999", "error");
+  } else {
+    return true;
+  }
+}
