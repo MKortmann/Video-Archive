@@ -150,7 +150,7 @@ class UI {
     //the message should disappear after 3 seconds
     setTimeout(function() {
       document.querySelector(".alert").remove();
-    }, 3000);
+    }, 4000);
   }
 
   //Writing the Date in the table in another format
@@ -504,7 +504,10 @@ function validateTime(videoTime) {
 // videoTime should be in the format dd:dd
 function validateVideoNo(videoNo) {
   // We check that the video number should have max. 4 digits!
-  const re = /^\d{1,4}$/;
+  // First way to write:
+  // const re = /^\d{1,4}$/;
+  // Second way to write: To make it differently
+  const re = /^[0-9]{1,4}$/;
   if(!re.test(videoNo)) {
     ui.showAlert("Please, the video number must be between 1 and 9999", "error");
   } else {
