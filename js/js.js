@@ -189,7 +189,7 @@ class UI {
 
   }
 
-};
+}; //end of class UI
 // ui object!
 const ui = new UI();
 
@@ -312,7 +312,8 @@ class Store {
     xhttp.send();
 
   }
-}
+} //end of class storage
+
 
 /*
  * PART 2: User Interface Interaction/LOGIC
@@ -409,7 +410,7 @@ document.querySelector(".toggleContainer").addEventListener("click", function() 
  * It's a very important step. Here the localStorage will be retrieve and the table
  * list of videos will be filled.
  */
-document.addEventListener("DOMContentLoaded", Store.displayVideos());
+// document.addEventListener("DOMContentLoaded", Store.displayVideos());
 
 /* SUBMIT
  * It submit the form! Here is where the hole logic of this video archive starts.
@@ -429,12 +430,12 @@ document.querySelector("#submit").addEventListener("click", function(e) {
   const icdC = document.querySelector(".icdC").value;
   const icdABC = [icdA, icdB, icdC];
 
-  const dsf1 = document.querySelector(".dsf1").value;
-  const dsf2 = document.querySelector(".dsf2").value;
-  const dsf3 = document.querySelector(".dsf3").value;
-  const dsf4 = document.querySelector(".dsf4").value;
-  const dsf5 = document.querySelector(".dsf5").value;
-  const alle = document.querySelector(".alle").value;
+  const dsf1 = document.querySelector(".dsf1").checked;
+  const dsf2 = document.querySelector(".dsf2").checked;
+  const dsf3 = document.querySelector(".dsf3").checked;
+  const dsf4 = document.querySelector(".dsf4").checked;
+  const dsf5 = document.querySelector(".dsf5").checked;
+  const alle = document.querySelector(".alle").checked;
   const dsfS = [dsf1, dsf2, dsf3, dsf4, dsf5, alle];
 
   const leitungName = document.querySelector(".leitungName").value;
@@ -478,14 +479,14 @@ document.querySelector(".videoList").addEventListener("click", function(e) {
 */
 // Validate functions to check the inputs: Using Regular expressions
 // ProjectName should be only carachters from min. 3 to max. 12.
-function validateProjectName(projectName) {
-  const re = /^[a-zA-Z]{3,12}$/;
-  if(!re.test(projectName)) {
-    ui.showAlert("Please, the project name must be between 3 and 12 characters", "error");
-  } else {
-    return true;
-  }
-}
+// function validateProjectName(projectName) {
+//   const re = /^[a-zA-Z]{3,12}$/;
+//   if(!re.test(projectName)) {
+//     ui.showAlert("Please, the project name must be between 3 and 12 characters", "error");
+//   } else {
+//     return true;
+//   }
+// }
 
 // videoTitle should be only carachters from min. 3 to max. 12.
 // function validateVideoTitle(videoTitle) {
@@ -543,6 +544,7 @@ function validatePiz(piz) {
   } else {
     return true;
   }
+}
 //The video should not be upload if the icdA is empty... The icdB and icdC can be empty.
 function validateIcdABC(icdABC) {
   if(!icdABC[0] === undefined) {
