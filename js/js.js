@@ -43,17 +43,15 @@
  * @class
  */
 class Video {
-  constructor(projectName = "", videoTitle = "", patientName = "", videoDate = "", videoTime = "", videoNo = "") {
-    this.projectName = projectName;
-    this.videoTitle = videoTitle;
-    this.patientName = patientName;
+  constructor(videoDate = "", patientName = "", piz = "", icdABC = [],
+              dsfS=[], leitungName="") {
     this.videoDate = videoDate;
-    this.videoTime = videoTime;
-    this.videoNo = videoNo;
+    this.patientName = patientName;
+    this.piz = piz;
+    this.icdABC = icdABC;
+    this.dsfS = dsfS;
     //variables from the local video data
-    this.videoName = "";
-    this.videoSize = "";
-    this.videoType = "";
+    this.leitungName = "";
   }
 
   getLocalVideoInfos(name, size, type) {
@@ -62,13 +60,15 @@ class Video {
     this.videoType = type;
   }
 
-  getFormData(projectName = "", videoTitle = "", patientName = "", videoDate = "", videoTime = "", videoNo = "") {
-    this.projectName = projectName;
-    this.videoTitle = videoTitle;
-    this.patientName = patientName;
+  getFormData(videoDate = "", patientName = "", piz = "", icdABC = [],
+              dsfS=[], leitungName="") {
     this.videoDate = videoDate;
-    this.videoTime = videoTime;
-    this.videoNo = videoNo;
+    this.patientName = patientName;
+    this.piz = piz;
+    this.icdABC = icdABC;
+    this.dsfS = dsfS;
+    //variables from the local video data
+    this.leitungName = "";
   }
 };
 //video object

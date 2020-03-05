@@ -20,6 +20,7 @@
     <button class="loadTableFromJSON noDisplay">Load Videos From Table</button>
     <button class="openSelectVideoFile">Select a Video File</button>
     <button class="toggleContainer">Remove the input form</button>
+    <button class="videoLinkOld">Alte Videos</button>
     <!-- <button class="runBat">Run Bat File</button>
   <button value="Launch Installer" onclick="window.open('http://127.0.0.1:8080/bat/run.txt')">openCMD</button> -->
   </div>
@@ -46,15 +47,15 @@
       <div class=row>
         <div class="four columns">
           <label>ICD_A</label>
-          <input type="number" min="0" max="100" class="u-full-width icdA" placeholder="80">
+          <input type="number" min="0" max="999" class="u-full-width icdA" placeholder="80">
         </div>
         <div class="four columns">
           <label>ICD_B</label>
-          <input type="number" min="0" max="100" class="u-full-width icdB">
+          <input type="number" min="0" max="999" class="u-full-width icdB">
         </div>
         <div class="four columns">
           <label>ICD_C</label>
-          <input type="number" min="0" max="100" class="u-full-width icdC">
+          <input type="number" min="0" max="999" class="u-full-width icdC">
         </div>
       </div>
         <div class="row containerCheckbox">
@@ -63,25 +64,23 @@
                 <label>DS-Freigabe vorliegend: &nbsp </label>
                   <input type="checkbox" class="checkBoxCss" id="dsf1">
                   <label for="dsf1"> DSF-1 &nbsp</label>
-                  <input type="checkbox" class="checkBoxCss" id="dsf1">
+                  <input type="checkbox" class="checkBoxCss" id="dsf2">
                   <label for="dsf1">DSF-2 &nbsp</label>
-                  <input type="checkbox" class="checkBoxCss" id="dsf1">
+                  <input type="checkbox" class="checkBoxCss" id="dsf3">
                   <label for="dsf1">DSF-3 &nbsp</label>
-                  <input type="checkbox" class="checkBoxCss" id="dsf1">
+                  <input type="checkbox" class="checkBoxCss" id="dsf4">
                   <label for="dsf1">DSF-4 &nbsp</label>
-                  <input type="checkbox" class="checkBoxCss" id="dsf1">
+                  <input type="checkbox" class="checkBoxCss" id="dsf5">
                   <label for="dsf1">DSF-5 &nbsp</label>
                   <input type="checkbox" class="checkBoxCss" id="allesDsf">
                   <label for="allesDsf">ALLE</label>
             </div>
           </div>
-
           <div class="four columns">
             <label>Leitung Name</label>
             <input type="text" class="u-full-width leitungName" placeholder="Nachname, Vorname">
           </div>
         </div>
-
       </div>
       <!-- Date, Time and Video Number -->
       <div class="row">
@@ -101,7 +100,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Video No.</th>
+          <!-- <th>Video No.</th> -->
           <th>Video</th>
           <th>Date</th>
           <th>Patient Name</th>
