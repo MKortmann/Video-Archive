@@ -43,10 +43,10 @@
  * @class
  */
 class Video {
-  constructor(projectName = "", videoTitle = "", yourName = "", videoDate = "", videoTime = "", videoNo = "") {
+  constructor(projectName = "", videoTitle = "", patientName = "", videoDate = "", videoTime = "", videoNo = "") {
     this.projectName = projectName;
     this.videoTitle = videoTitle;
-    this.yourName = yourName;
+    this.patientName = patientName;
     this.videoDate = videoDate;
     this.videoTime = videoTime;
     this.videoNo = videoNo;
@@ -62,10 +62,10 @@ class Video {
     this.videoType = type;
   }
 
-  getFormData(projectName = "", videoTitle = "", yourName = "", videoDate = "", videoTime = "", videoNo = "") {
+  getFormData(projectName = "", videoTitle = "", patientName = "", videoDate = "", videoTime = "", videoNo = "") {
     this.projectName = projectName;
     this.videoTitle = videoTitle;
-    this.yourName = yourName;
+    this.patientName = patientName;
     this.videoDate = videoDate;
     this.videoTime = videoTime;
     this.videoNo = videoNo;
@@ -102,7 +102,7 @@ class UI {
       <td class="videoFlex"><video width="160" height="auto" controls><source src="./videos/${video.videoName}" type="video/mp4"></video></td>
       <td>${video.projectName}</td>
       <td>${video.videoTitle}</td>
-      <td>${video.yourName}</td>
+      <td>${video.patientName}</td>
       <td>${this.newDateFormat(video.videoDate)}</td>
       <td>${video.videoTime}</td>
       <td>${video.videoNo}</td>
@@ -412,17 +412,17 @@ document.querySelector("#submit").addEventListener("click", function(e) {
 
   const projectName = document.querySelector(".projectName").value;
   const videoTitle = document.querySelector(".videoTitle").value;
-  const yourName = document.querySelector(".yourName").value;
+  const patientName = document.querySelector(".patientName").value;
   const videoDate = document.querySelector(".videoDate").value;
   const videoTime = document.querySelector(".videoTime").value;
   const videoNo = document.querySelector(".videoNo").value;
   //Check if you have selected a file
   const videoFile = document.querySelector(".openSelectVideoFile").innerText;
 
-  video.getFormData(projectName, videoTitle, yourName, videoDate, videoTime, videoNo);
+  video.getFormData(projectName, videoTitle, patientName, videoDate, videoTime, videoNo);
 
   // Validate input
-  if (!validateProjectName(projectName) || !validateVideoTitle(videoTitle) || !validateYourName(yourName) || !validateDate(videoDate) || !validateTime(videoTime) || !validateVideoNo(videoNo)) {
+  if (!validateProjectName(projectName) || !validateVideoTitle(videoTitle) || !validatepatientName(patientName) || !validateDate(videoDate) || !validateTime(videoTime) || !validateVideoNo(videoNo)) {
     ui.showAlert("Please, check your inputs!", "error");
   } else if (videoFile === "SELECT A VIDEO FILE") {
     ui.showAlert("Please, select a video!", "error");
@@ -435,7 +435,7 @@ document.querySelector("#submit").addEventListener("click", function(e) {
     // It basically load the localstorage to an variable, convert it to JSON and download it.
     Store.downloadVideosToJSON();
     // Show sucess message
-    ui.showAlert(`Dear ${video.yourName}, the video: ${video.videoTitle} has been added!`, "success");
+    ui.showAlert(`Dear ${video.patientName}, the video: ${video.videoTitle} has been added!`, "success");
     // Clear Fields
     ui.clearFields();
   }
@@ -472,10 +472,10 @@ function validateVideoTitle(videoTitle) {
     return true;
   }
 }
-// yourName should be only carachters the firstname, lastname FORMAT!!!
-function validateYourName(yourName) {
+// patientName should be only carachters the firstname, lastname FORMAT!!!
+function validatepatientName(patientName) {
   const re = /^([a-zA-Z]{3,10})\,[ ]([a-zA-Z]{3,10})$/;
-  if(!re.test(yourName)) {
+  if(!re.test(patientName)) {
     ui.showAlert("Please, your name should be written in this format: firstname, lastname! The first and lastname must be between 3 and 10 characters!", "error");
   } else {
     return true;

@@ -51,8 +51,11 @@ h1 {
 /*
  * Buttons: user interface
 */
-.loadTableFromJSON,
-.downloadVideoToJSON {
+.containerCheckbox {
+  display: flex;
+  align-items: center;
+}
+.noDisplay {
   display: none;
 }
 .bContainer {

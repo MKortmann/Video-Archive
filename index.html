@@ -16,8 +16,8 @@
   <br>
   <!-- UI interface -->
   <div class="bContainer">
-    <button class="downloadVideoToJSON">Download Videos to Table</button>
-    <button class="loadTableFromJSON">Load Videos From Table</button>
+    <button class="downloadVideoToJSON noDisplay">Download Videos to Table</button>
+    <button class="loadTableFromJSON noDisplay">Load Videos From Table</button>
     <button class="openSelectVideoFile">Select a Video File</button>
     <button class="toggleContainer">Remove the input form</button>
     <!-- <button class="runBat">Run Bat File</button>
@@ -31,31 +31,75 @@
       <!-- Project Name & Video Title & Your Name -->
       <div class=row>
         <div class="four columns">
-          <label class="u-pull-left">Project Name</label>
-          <input type="text" class="u-full-width projectName" placeholder="Insert your project name">
-        </div>
-        <div class="four columns">
-          <label class="u-pull-left">Video Title</label>
-          <input type="text" class="u-full-width videoTitle" placeholder="Insert your title for this video">
-        </div>
-        <div class="four columns">
-          <label>Your Full Name</label>
-          <input type="text" class="u-full-width yourName" placeholder="Insert your full name: Firstname, Lastname">
-        </div>
-      </div>
-      <!-- Date, Time and Video Number -->
-      <div class="row">
-        <div class="four columns">
-          <label>Date</label>
+          <label>Aufnahme Datum</label>
           <input type="date" class="u-full-width videoDate">
         </div>
         <div class="four columns">
-          <label>Time</label>
-          <input type="time" class="u-full-width videoTime">
+          <label>Patient Name</label>
+          <input type="text" class="u-full-width patientName" placeholder="Nachname, Vorname">
         </div>
         <div class="four columns">
+          <label>PIZ</label>
+          <input type="number" min="11111111" max="99999999" class="u-full-width piz" placeholder="11111111">
+        </div>
+      </div>
+      <div class=row>
+        <div class="four columns">
+          <label>ICD_A</label>
+          <input type="number" min="0" max="100" class="u-full-width icdA" placeholder="80">
+        </div>
+        <div class="four columns">
+          <label>ICD_B</label>
+          <input type="number" min="0" max="100" class="u-full-width icdB">
+        </div>
+        <div class="four columns">
+          <label>ICD_C</label>
+          <input type="number" min="0" max="100" class="u-full-width icdC">
+        </div>
+      </div>
+        <div class=row>
+          <div class="eight columns">
+            <div class="containerCheckbox">
+                <label>DS-Freigabe vorliegend: </label>
+                  <input type="checkbox" id="dsf1">
+                  <label for="dsf1">DSF-1</label>
+                  <input type="checkbox" id="dsf1">
+                  <label for="dsf1">DSF-2</label>
+                  <input type="checkbox" id="dsf1">
+                  <label for="dsf1">DSF-3</label>
+                  <input type="checkbox" id="dsf1">
+                  <label for="dsf1">DSF-4</label>
+                  <input type="checkbox" id="dsf1">
+                  <label for="dsf1">DSF-5</label>
+            </div>
+          </div>
+
+          <div class="four columns">
+            <label>Leitung Name</label>
+            <input type="text" class="u-full-width leitungName" placeholder="Nachname, Vorname">
+          </div>
+        </div>
+
+        <div class="four columns noDisplay">
           <label>Video No.</label>
           <input type="number" min="1" max="9999" class="u-full-width videoNo" placeholder="1">
+        </div>
+
+        <div class="four columns noDisplay">
+          <label class="u-pull-left">Project Name</label>
+          <input type="text" class="u-full-width projectName" placeholder="Insert your project name">
+        </div>
+        <div class="four columns noDisplay">
+          <label class="u-pull-left">Video Title</label>
+          <input type="text" class="u-full-width videoTitle" placeholder="Insert your title for this video">
+        </div>
+
+      </div>
+      <!-- Date, Time and Video Number -->
+      <div class="row">
+        <div class="four columns noDisplay">
+          <label>Time</label>
+          <input type="time" class="u-full-width videoTime">
         </div>
       </div>
       <div>
@@ -69,13 +113,21 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Video</th>
-          <th>Project Name</th>
-          <th>Video Title</th>
-          <th>Name</th>
-          <th>Date</th>
-          <th>Time</th>
           <th>Video No.</th>
+          <th>Video</th>
+          <th>Date</th>
+          <th>Patient Name</th>
+          <th>PIZ</th>
+          <th>ICD_A</th>
+          <th>ICD_B</th>
+          <th>ICD_C</th>
+          <th>DS-Freigabe vorliegend</th>
+          <th>DSF-1</th>
+          <th>DSF-2</th>
+          <th>DSF-3</th>
+          <th>DSF-4</th>
+          <th>DSF-5</th>
+          <th>Leitung</th>
           <th id="x">X</th>
         </tr>
       </thead>
