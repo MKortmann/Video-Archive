@@ -11,7 +11,7 @@
  * The code is composed and written in the order below:
  * PART 1: INITIALIZATION/SETUP/STRUCTURE
  * Class Video: create an object for each video with the specific informations
- as project name, video title, user name and so on.
+ as datei name, video title, user name and so on.
  * Class UI: used to manipulate the DOM. Here we see important methods from the
  user interface as addVideoToList, deleteVideo, clearFields, showAlertMessage,
  new date format and so on.
@@ -39,12 +39,13 @@
 
 /**
  * Creates an object video with the respective informations as
- * project Name, title and so on.
+ * dateiName, videoDate, title and so on.
  * @class
  */
 class Video {
-  constructor(videoDate = "", patientName = "", piz = "", icdABC = [],
+  constructor(dateiName = "", videoDate = "", patientName = "", piz = "", icdABC = [],
               dsfS=[], leitungName="") {
+    this.dateiName = dateiName;
     this.videoDate = videoDate;
     this.patientName = patientName;
     this.piz = piz;
@@ -60,8 +61,9 @@ class Video {
     this.videoType = type;
   }
 
-  getFormData(videoDate = "", patientName = "", piz = "", icdABC = [],
+  getFormData(dateiName="", videoDate = "", patientName = "", piz = "", icdABC = [],
               dsfS=[], leitungName="") {
+    this.dateiName = dateiName;
     this.videoDate = videoDate;
     this.patientName = patientName;
     this.piz = piz;
@@ -79,7 +81,7 @@ let video = new Video();
  * @class
  */
 class UI {
-
+  //add video to the table
   addVideoToList(video, index) {
 
     const videoList = document.querySelector(".videoList");
@@ -98,14 +100,21 @@ class UI {
     // Insert columns
     row.innerHTML = `
       <td>${id}</td>
+      <td>${video.dateiName}</td>
       <!-- <td><video width="320" height="240" controls><source src="./videos/${video.videoName}" type="video/mp4"></video></td> -->
-      <td class="videoFlex"><video width="160" height="auto" controls><source src="./videos/${video.videoName}" type="video/mp4"></video></td>
-      <td>${video.projectName}</td>
-      <td>${video.videoTitle}</td>
+      <td class="videoFlex"><video width="160" height="auto" controls><source src="./videos/${video.dateiName}" type="video/mp4"></video></td>
+      <td>${video.videoDate}</td>
       <td>${video.patientName}</td>
-      <td>${this.newDateFormat(video.videoDate)}</td>
-      <td>${video.videoTime}</td>
-      <td>${video.videoNo}</td>
+      <td>${video.icdABC[0]}</td>
+      <td>${video.icdABC[1]}</td>
+      <td>${video.icdABC[2]}</td>
+      <td>${this.dsfS[0]}</td>
+      <td>${this.dsfS[1]}</td>
+      <td>${this.dsfS[2]}</td>
+      <td>${this.dsfS[3]}</td>
+      <td>${this.dsfS[4]}</td>
+      <td>${this.dsfS[5]}</td>
+      <td>${video.leitungName}</td>
       <td  class="delete">X</td>
     `;
     //append element
@@ -126,7 +135,7 @@ class UI {
     // It basically load the localstorage to an variable, convert it to JSON and download it.
     Store.downloadVideosToJSON();
   }
-
+  // Clear the input fields
   clearFields() {
     // clearing the form!
     document.querySelector(".form").reset();
@@ -221,7 +230,8 @@ class Store {
     // ///////////////////////////////////////////////////////////////////////////
   }
 
-  // Add Video to localStorage
+  // Add Video to localStorage: we get the stored videos, add the new (push), then
+  // set the localStorage again
   static addVideo(video) {
     const videos = Store.getVideosFromLS();
     // add to LocalStorage
@@ -335,7 +345,8 @@ document.querySelector(".downloadVideoToJSON").addEventListener("click", functio
  * It opens a dialog box to be able to select the video to be stored. The info
  * capture is the name, file and size of the video. The videos should be always in
  * a specific folder already defined. In this case ./videos/*.mp4
- * At this moment the video must be copied to the videos folder!
+ * Why? Because of the restrictions/security added by all browsers!
+ * At this moment the video must be copy/save direct to the videos folder!
  */
 document.querySelector(".openSelectVideoFile").addEventListener("click", function() {
 
@@ -410,19 +421,32 @@ document.addEventListener("DOMContentLoaded", Store.displayVideos());
  */
 document.querySelector("#submit").addEventListener("click", function(e) {
 
-  const projectName = document.querySelector(".projectName").value;
-  const videoTitle = document.querySelector(".videoTitle").value;
-  const patientName = document.querySelector(".patientName").value;
   const videoDate = document.querySelector(".videoDate").value;
-  const videoTime = document.querySelector(".videoTime").value;
-  const videoNo = document.querySelector(".videoNo").value;
-  //Check if you have selected a file
-  const videoFile = document.querySelector(".openSelectVideoFile").innerText;
+  const patientName = document.querySelector(".patientName").value;
+  const piz = document.querySelector(".piz").value;
+  const icdA = document.querySelector(".icdA").value;
+  const icdB = document.querySelector(".icdB").value;
+  const icdC = document.querySelector(".icdC").value;
+  const icdABC = [icdA, icdB, icdC];
 
-  video.getFormData(projectName, videoTitle, patientName, videoDate, videoTime, videoNo);
+  const dsf1 = document.querySelector(".dsf1").value;
+  const dsf2 = document.querySelector(".dsf2").value;
+  const dsf3 = document.querySelector(".dsf3").value;
+  const dsf4 = document.querySelector(".dsf4").value;
+  const dsf5 = document.querySelector(".dsf5").value;
+  const alle = document.querySelector(".alle").value;
+  const dsfS = [dsf1, dsf2, dsf3, dsf4, dsf5, alle];
+
+  const leitungName = document.querySelector(".leitungName").value;
+
+  //Check if you have selected a file
+  const dateiName = document.querySelector(".openSelectVideoFile").innerText;
+
+  video.getFormData(dateiName, videoDate, patientName, piz, icdABC, dsfS, leitungName);
 
   // Validate input
-  if (!validateProjectName(projectName) || !validateVideoTitle(videoTitle) || !validatepatientName(patientName) || !validateDate(videoDate) || !validateTime(videoTime) || !validateVideoNo(videoNo)) {
+  if (!validateName(patientName) || !validateDate(videoDate) ||!validatePiz(piz)
+      || !validateIcdABC(icdABC)|| !validateDsfS(dsfS) || !validateName(leitungName)) {
     ui.showAlert("Please, check your inputs!", "error");
   } else if (videoFile === "SELECT A VIDEO FILE") {
     ui.showAlert("Please, select a video!", "error");
@@ -435,7 +459,7 @@ document.querySelector("#submit").addEventListener("click", function(e) {
     // It basically load the localstorage to an variable, convert it to JSON and download it.
     Store.downloadVideosToJSON();
     // Show sucess message
-    ui.showAlert(`Dear ${video.patientName}, the video: ${video.videoTitle} has been added!`, "success");
+    ui.showAlert(`Hallo ${video.leitungName}, das Video: ${video.dateiName} ist hochgeladen!`, "Erfolg");
     // Clear Fields
     ui.clearFields();
   }
@@ -464,18 +488,18 @@ function validateProjectName(projectName) {
 }
 
 // videoTitle should be only carachters from min. 3 to max. 12.
-function validateVideoTitle(videoTitle) {
-  const re = /^[a-zA-Z]{3,10}$/;
-  if(!re.test(videoTitle)) {
-    ui.showAlert("Please, the video title must be between 3 and 10 characters", "error");
-  } else {
-    return true;
-  }
-}
+// function validateVideoTitle(videoTitle) {
+//   const re = /^[a-zA-Z]{3,10}$/;
+//   if(!re.test(videoTitle)) {
+//     ui.showAlert("Please, the video title must be between 3 and 10 characters", "error");
+//   } else {
+//     return true;
+//   }
+// }
 // patientName should be only carachters the firstname, lastname FORMAT!!!
-function validatepatientName(patientName) {
+function validateName(Name) {
   const re = /^([a-zA-Z]{3,10})\,[ ]([a-zA-Z]{3,10})$/;
-  if(!re.test(patientName)) {
+  if(!re.test(Name)) {
     ui.showAlert("Please, your name should be written in this format: firstname, lastname! The first and lastname must be between 3 and 10 characters!", "error");
   } else {
     return true;
@@ -491,25 +515,47 @@ function validateDate(videoDate) {
     return true;
   }
 }
+// NOT USING!
 // videoTime should be in the format dd:dd
-function validateTime(videoTime) {
-  // We check this format here: "01:01"
-  const re = /^\d{2}[:]\d{2}$/;
-  if(!re.test(videoTime)) {
-    ui.showAlert("Please, the time should be in the format dd:dd", "error");
+// function validateTime(videoTime) {
+//   // We check this format here: "01:01"
+//   const re = /^\d{2}[:]\d{2}$/;
+//   if(!re.test(videoTime)) {
+//     ui.showAlert("Please, the time should be in the format dd:dd", "error");
+//   } else {
+//     return true;
+//   }
+// }
+// videoTime should be in the format dd:dd
+// piz should have exactly 8 digits
+function validatePiz(piz) {
+  // We check that the video number should have exactly 8 digits!
+  /*
+  String regEx = "^[0-9]{8}$";
+    ^ - start with a number.
+    [0-9] - use only digits (you can also use \d )
+    {8} - use 8 digits.
+    $ - End here. Don't add anything after 8 digits.
+  */
+  const re = /^[0-9]{8}$/;
+  if(!re.test(piz)) {
+    ui.showAlert("Please, the piz number must be between 11111111 and 99999999", "error");
+  } else {
+    return true;
+  }
+//The video should not be upload if the icdA is empty... The icdB and icdC can be empty.
+function validateIcdABC(icdABC) {
+  if(!icdABC[0] === undefined) {
+    ui.showAlert("Bitte, ICD_A sollte ausgefüllt werden", "error");
   } else {
     return true;
   }
 }
-// videoTime should be in the format dd:dd
-function validateVideoNo(videoNo) {
-  // We check that the video number should have max. 4 digits!
-  // First way to write:
-  // const re = /^\d{1,4}$/;
-  // Second way to write: To make it differently
-  const re = /^[0-9]{1,4}$/;
-  if(!re.test(videoNo)) {
-    ui.showAlert("Please, the video number must be between 1 and 9999", "error");
+//The video should not be upload if, at least, one of the fields of dsf1, dsf2...
+//is not checked
+function validateDsfS(dsfS) {
+  if(dsfS.length === 0) {
+    ui.showAlert("Bitte, ICD_A sollte ausgefüllt werden", "error");
   } else {
     return true;
   }

@@ -18,9 +18,11 @@
   <div class="bContainer">
     <button class="downloadVideoToJSON noDisplay">Download Videos to Table</button>
     <button class="loadTableFromJSON noDisplay">Load Videos From Table</button>
-    <button class="openSelectVideoFile">Select a Video File</button>
-    <button class="toggleContainer">Remove the input form</button>
-    <button class="videoLinkOld">Alte Videos</button>
+    <button class="openSelectVideoFile link">Select a Video File</button>
+    <button class="toggleContainer link">Remove the input form</button>
+    <button class="videoLinkOld">
+      <a href="http://www.google.com" class="link">Alte Videos</a>
+    </button>
     <!-- <button class="runBat">Run Bat File</button>
   <button value="Launch Installer" onclick="window.open('http://127.0.0.1:8080/bat/run.txt')">openCMD</button> -->
   </div>
@@ -51,11 +53,11 @@
         </div>
         <div class="four columns">
           <label>ICD_B</label>
-          <input type="number" min="0" max="999" class="u-full-width icdB">
+          <input type="number" min="0" max="999" class="u-full-width icdB" placeholder="80">
         </div>
         <div class="four columns">
           <label>ICD_C</label>
-          <input type="number" min="0" max="999" class="u-full-width icdC">
+          <input type="number" min="0" max="999" class="u-full-width icdC" placeholder="80">
         </div>
       </div>
         <div class="row containerCheckbox">
@@ -100,11 +102,11 @@
       <thead>
         <tr>
           <th>ID</th>
-          <!-- <th>Video No.</th> -->
+          <th>Datei Name</th>
           <th>Video</th>
           <th>Date</th>
           <th>Patient Name</th>
-          <th>PIZ</th>
+          <th>PIZ Nummer</th>
           <th>ICD_A</th>
           <th>ICD_B</th>
           <th>ICD_C</th>
@@ -114,7 +116,7 @@
           <th>DSF-3</th>
           <th>DSF-4</th>
           <th>DSF-5</th>
-          <th>Leitung</th>
+          <th>Leitung Name</th>
           <th id="x">X</th>
         </tr>
       </thead>
@@ -129,7 +131,7 @@
 
     <br>
     <footer>
-      KJP Video System - Developed by Marcelo Kortmann (2019)
+      KJP Video System - Developed by Marcelo Kortmann (2019-2020)
     </footer>
   </div>
   <script src="./js/js.js"></script>
