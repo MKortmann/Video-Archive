@@ -61,6 +61,10 @@ h1 {
 .bContainer {
   text-align: center;
 }
+.checkBoxCss {
+  width: 32px;
+  height: 26px;
+}
 
 .openClose {
   /* visibility: hidden; */
