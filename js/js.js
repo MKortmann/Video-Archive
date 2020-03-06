@@ -368,10 +368,10 @@ document.querySelector(".openSelectVideoFile").addEventListener("click", functio
  */
 document.querySelector(".toggleContainer").addEventListener("click", function() {
   if (document.querySelector(".container").classList.contains("openClose")) {
-    document.querySelector(".toggleContainer").innerText = "Remove the input form";
+    document.querySelector(".toggleContainer").innerText = "Eingabeformular schließen";
     document.querySelector(".container").classList.toggle("openClose");
   } else {
-    document.querySelector(".toggleContainer").innerText = "Add the input form";
+    document.querySelector(".toggleContainer").innerText = "Eingabeformular öffnen";
     document.querySelector(".container").classList.toggle("openClose");
   }
 });
@@ -445,13 +445,13 @@ document.querySelector("#submit").addEventListener("click", function(e) {
 
   video.getFormData(dateiName, videoDate, patientName, piz, icdABC, dsfS, leitungName);
 
-  // Validate input
-  if (!validateName(patientName) || !validateDate(videoDate) ||!validatePiz(piz)
+  // Validate inputs
+  if (dateiName === "SELECT A VIDEO FILE") {
+    ui.showAlert("Please, select a video!", "error");
+  } else if (!validateDate(videoDate) || !validateName(patientName) || !validatePiz(piz)
       || !validateIcdABC(icdABC)|| !validateDsfS(dsfS) || !validateName(leitungName)) {
     ui.showAlert("Please, check your inputs!", "error");
-  } else if (videoFile === "SELECT A VIDEO FILE") {
-    ui.showAlert("Please, select a video!", "error");
-  } else {
+  }  else {
     // Add video to the video list table
     ui.addVideoToList(video, "false");
     // Add video to LocalStorage: it will load the local storage and push the new video
@@ -511,7 +511,7 @@ function validateDate(videoDate) {
   // We check this format here: "2019-07-05"
   const re = /^\d{4}[-]\d{2}[-]\d{2}$/;
   if(!re.test(videoDate)) {
-    ui.showAlert("Please, the date should be in the format mm/dd/yyyy", "error");
+    ui.showAlert("Bitte, das Datum sollte im Format MM / TT / JJJJ sein", "error");
   } else {
     return true;
   }

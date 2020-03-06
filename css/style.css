@@ -4,6 +4,21 @@ https://www.quackit.com/css/css_color_codes.cfm */
 /*
  * HEADER
 */
+/* .logo {
+  max-width: 90px;
+  justify-content: left;
+  padding-bottom: 8px;
+}
+
+.icons {
+  max-width: 35px;
+  justify-content: left;
+  /* top, right, bottom, left */
+  padding: 0 5px 0 5px;
+  /* Adding filter to get the SICK LOGO (#097dbc) color */
+  filter: invert(34%) sepia(79%) saturate(841%) hue-rotate(166deg) brightness(98%) contrast(99%);
+} */
+
 h1 {
   text-align: center;
   color: firebrick;
